@@ -9,11 +9,12 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
+      body: Container(
+        margin: const EdgeInsets.only(left: 90.0),
         child: Column(
           children: const [
             SizedBox(
-              height: 261.0,
+              height: 250.0,
             ),
             Image(image: AssetImage('assets/images/Service_name.png')),
           ],

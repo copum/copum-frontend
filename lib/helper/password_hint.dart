@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 /// 비밀번호 입력창 위 텍스트 문구
@@ -12,7 +10,6 @@ class PasswordHint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log('###### build called');
     return Row(children: [
       Text.rich(TextSpan(children: [
         TextSpan(

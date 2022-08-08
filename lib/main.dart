@@ -2,6 +2,7 @@ import 'package:copum/login/kakao_login.dart';
 import 'login/kakao_login.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'make_Id.dart';
 
 void main() {
   KakaoSdk.init(nativeAppKey: '78f94ea53fd455b3cc5ae677e82e0459');

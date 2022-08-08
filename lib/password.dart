@@ -74,7 +74,7 @@ class _PasswordState extends State<Password> {
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const StartPage()));
-          }, // 상단 앱바 뒤로가기 버튼 클릭이벤트 추가해야함
+          },
           icon: const Icon(Icons.arrow_back),
         ),
       ),
@@ -134,7 +134,7 @@ class _PasswordState extends State<Password> {
                       }
                     }
                   },
-                  //obscureText: !_isVisible, // text 암호화
+                  obscureText: !_isVisible, // text 암호화
                   decoration: InputDecoration(
                     errorStyle: TextStyle(
                       color: password_strength >= 2 / 4
