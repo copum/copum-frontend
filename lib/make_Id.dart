@@ -1,4 +1,5 @@
 import 'package:copum/main.dart';
+import 'package:copum/start.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'helper/password_hint.dart';
@@ -58,10 +59,6 @@ class _makeIdState extends State<makeId> {
   bool isChecked2 = false;
   bool isChecked3 = false;
   bool isButtonActive = true;
-
-  Color changeColor(Set<MaterialState> states) {
-    return Colors.blue;
-  }
 
   bool checkedAll() {
     return (isChecked && isChecked2 && isChecked3);
@@ -166,7 +163,12 @@ class _makeIdState extends State<makeId> {
                 margin: const EdgeInsets.only(top: 311),
                 child: ElevatedButton(
                   onPressed: () {
-                    // 다음버튼이벤트
+                    if (checkedAll()) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Login();
+                      }));
+                    } else {}
                   },
                   style: ElevatedButton.styleFrom(
                     primary: checkedAll() ? Colors.red : Colors.grey,
