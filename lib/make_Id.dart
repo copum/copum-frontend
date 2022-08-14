@@ -164,6 +164,7 @@ class _makeIdState extends State<makeId> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (checkedAll()) {
+                      //다음 버튼 클릭 시 넘어갈 페이지 설정
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return Login();
