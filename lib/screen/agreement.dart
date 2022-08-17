@@ -1,15 +1,9 @@
-import 'package:copum/main.dart';
-import 'package:copum/start.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'helper/password_hint.dart';
-import 'helper/make_id_hint.dart';
-import 'main.dart';
+import '../widget/make_id_hint.dart';
+import '../widget/password_hint.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class AgreementScreen extends StatelessWidget {
+  const AgreementScreen({Key? key}) : super(key: key);
 
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -41,20 +35,19 @@ class MyApp extends StatelessWidget {
         checkboxTheme: CheckboxThemeData(
             fillColor: MaterialStateProperty.resolveWith(getColor)),
       ),
-      title: 'makeid',
-      home: makeId(),
+      home: const AgreementPage(),
     );
   }
 }
 
-class makeId extends StatefulWidget {
-  const makeId({Key? key}) : super(key: key);
+class AgreementPage extends StatefulWidget {
+  const AgreementPage({Key? key}) : super(key: key);
 
   @override
-  State<makeId> createState() => _makeIdState();
+  State<AgreementPage> createState() => _AgreementPageState();
 }
 
-class _makeIdState extends State<makeId> {
+class _AgreementPageState extends State<AgreementPage> {
   bool isChecked = false;
   bool isChecked2 = false;
   bool isChecked3 = false;
@@ -74,11 +67,9 @@ class _makeIdState extends State<makeId> {
         title: const Text('회원가입'),
         leading: IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return Login();
-              }));
+              //Get.to(Login());
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -164,12 +155,8 @@ class _makeIdState extends State<makeId> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (checkedAll()) {
-                      //다음 버튼 클릭 시 넘어갈 페이지 설정
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Login();
-                      }));
-                    } else {}
+                      //다음 버튼 클릭 시 넘어갈 페이지 설정 (get.to)
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: checkedAll() ? Colors.red : Colors.grey,

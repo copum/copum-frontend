@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class MakeIdHint extends StatefulWidget {
   final String first;
   final String second;
-  // final String second;
 
   const MakeIdHint(this.first, this.second, {Key? key}) : super(key: key);
 

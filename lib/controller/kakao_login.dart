@@ -1,4 +1,3 @@
-import 'package:copum/utils/write_log.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_user.dart';
 
 class KakaoLogin {

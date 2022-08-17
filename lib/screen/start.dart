@@ -1,4 +1,8 @@
+import 'package:copum/screen/login.dart';
+import 'package:copum/screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 //어플 실행했을때 처음 보여지는 화면
 
@@ -7,6 +11,9 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(
+        const Duration(seconds: 2), () => {Get.to(const LoginScreen())});
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(

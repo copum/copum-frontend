@@ -1,31 +1,16 @@
-import 'package:copum/helper/password_hint.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+// import 'package:get/get.dart';
+import '../widget/password_hint.dart';
 import 'start.dart';
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class PasswordScreen extends StatefulWidget {
+  const PasswordScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Password',
-      home: Password(),
-    );
-  }
+  State<PasswordScreen> createState() => _PasswordScreenState();
 }
 
-class Password extends StatefulWidget {
-  const Password({Key? key}) : super(key: key);
-
-  @override
-  State<Password> createState() => _PasswordState();
-}
-
-class _PasswordState extends State<Password> {
+class _PasswordScreenState extends State<PasswordScreen> {
   String inputText = '';
   bool _isVisible = false;
   RegExp pass_valid = RegExp(r"(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)");
@@ -72,8 +57,7 @@ class _PasswordState extends State<Password> {
         title: const Text('회원가입'),
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const StartPage()));
+            // Get.to(StartPage());
           },
           icon: const Icon(Icons.arrow_back),
         ),
