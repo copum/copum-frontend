@@ -22,13 +22,9 @@ class MyApp extends StatelessWidget {
         Get.put(RootController());
       }),
       //home: StartPage(),
-<<<<<<< HEAD
-      home: LoginScreen(),
-      // home: const Root(),
-=======
-      //home: const Root(),
       home: const LoginScreen(),
->>>>>>> fc1c257 (kakao 로그인 임시저장)
+      // home: const Root(),
+      //home: const Root(),
     );
   }
 }
