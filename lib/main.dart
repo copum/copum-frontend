@@ -6,7 +6,7 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:get/get.dart';
 
 void main() {
-  KakaoSdk.init(nativeAppKey: '78f94ea53fd455b3cc5ae677e82e0459');
+  KakaoSdk.init(nativeAppKey: 'AIzaSyBXBdTPVPYtci88SBLoHQb8hcrCi1pqtTM');
   runApp(const MyApp());
 }
 
@@ -22,8 +22,13 @@ class MyApp extends StatelessWidget {
         Get.put(RootController());
       }),
       //home: StartPage(),
+<<<<<<< HEAD
       home: LoginScreen(),
       // home: const Root(),
+=======
+      //home: const Root(),
+      home: const LoginScreen(),
+>>>>>>> fc1c257 (kakao 로그인 임시저장)
     );
   }
 }

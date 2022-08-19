@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-
 import '../screen/root.dart';
 
 class Community extends StatelessWidget {

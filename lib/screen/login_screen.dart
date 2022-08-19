@@ -1,6 +1,7 @@
 import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
 import '../controller/kakao_login.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
