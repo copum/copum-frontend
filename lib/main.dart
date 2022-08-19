@@ -1,4 +1,5 @@
 import 'package:copum/controller/root_controller.dart';
+import 'package:copum/screen/login_screen.dart';
 import 'package:copum/screen/root.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         Get.put(RootController());
       }),
       //home: StartPage(),
-      home: const Root(),
+      home: LoginScreen(),
+      // home: const Root(),
     );
   }
 }

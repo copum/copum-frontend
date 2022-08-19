@@ -1,3 +1,4 @@
+import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
 import '../controller/kakao_login.dart';
 
@@ -110,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            onPressed: () {},
+            onPressed: signIn,
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               minimumSize: const Size(320, 48),
@@ -187,5 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Future signIn() async {
+    await GoogleSignInApi.login();
   }
 }

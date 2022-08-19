@@ -13,7 +13,7 @@ class AgreementScreen extends StatelessWidget {
       MaterialState.selected
     };
     if (states.any(interactiveStates.contains)) {
-      return Colors.black;
+      return Color.fromARGB(255, 127, 102, 102);
     }
     return Colors.grey;
   }
