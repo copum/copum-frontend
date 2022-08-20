@@ -2,6 +2,7 @@ import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
 import '../controller/kakao_login.dart';
 import 'package:get/get.dart';
+import 'google_login_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -192,6 +193,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future signIn() async {
-    await GoogleSignInApi.login();
+    final user = await GoogleSignInApi.login();
+    
+    if (user == null) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Sign in failed')));
+    } else {
+      print("user: " + user.id);
+      print("user: " + user.email);
+
+      print(user);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (context) => LogggedInPage(user: user),
+      ));
+    }
   }
 }
