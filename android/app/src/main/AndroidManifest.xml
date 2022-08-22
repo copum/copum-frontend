@@ -1,8 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.copum">
+   
+   <uses-permission android:name="android.permission.INTERNET" /> 
+   
    <application
         android:label="copum"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
 
         <activity android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity">
@@ -12,7 +16,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <!-- Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식 -->
-                <data android:scheme="kakao78f94ea53fd455b3cc5ae677e82e0459" 
+                <data android:scheme="kakaoed5535e02148446b7b2068a4c04bed78" 
                       android:host="oauth"/>
             </intent-filter>
         </activity>
