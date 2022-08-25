@@ -7,6 +7,18 @@ import 'package:get/get.dart';
 import 'google_login_screen.dart';
 import 'package:http/http.dart' as http;
 
+class ServerResponse extends Response {
+  bool error;
+  String data;
+  String message;
+
+  ServerResponse({
+    required this.error,
+    required this.message,
+    required this.data,
+  });
+}
+
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -19,8 +31,16 @@ class LoginScreen extends GetView<LoginController> {
 
       // final serverResult = await http.get(Uri.parse(
       //     "http://localhost:8000/account/google/login?access_token=${accessToken}"));
-
-      if (accessToken != null) {
+      // if (serverResult.statusCode != 200) {
+      //   Navigator.of(context).pushReplacement(
+      //       MaterialPageRoute(builder: (context) => Root(user: user)));
+      // } else {
+      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //     content: Text('Sign in failed'),
+      //   ));
+      // }
+      final test = 1;
+      if (test == 1) {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => Root(user: user)));
       } else {
