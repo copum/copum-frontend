@@ -41,7 +41,7 @@ class LoginScreen extends GetView<LoginController> {
       // }
 
       //이게 서버에 닿기만 하면 됩니다.
-      String access_token = "1234";
+      String accessToken = "1234";
       final serverResult = await http.get(Uri.parse(
           "http://localhost:8000/account/google/login?access_token=${accessToken}"));
     }
