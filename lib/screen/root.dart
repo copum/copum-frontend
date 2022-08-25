@@ -7,7 +7,8 @@ import '../src/home.dart';
 import '../src/profile.dart';
 
 class Root extends GetView<RootController> {
-  const Root({Key? key}) : super(key: key);
+  final user;
+  Root({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

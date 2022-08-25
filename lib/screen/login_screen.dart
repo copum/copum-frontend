@@ -1,14 +1,35 @@
+import 'package:copum/screen/root.dart';
+import 'package:path/path.dart' as Path;
 import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
 import '../controller/kakao_login_controller.dart';
 import 'package:get/get.dart';
 import 'google_login_screen.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Future signIn() async {
+      final user = await GoogleSignInApi.login();
+      final auth = await user?.authentication;
+      String? accessToken = auth?.accessToken;
+
+      // final serverResult = await http.get(Uri.parse(
+      //     "http://localhost:8000/account/google/login?access_token=${accessToken}"));
+
+      if (accessToken != null) {
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => Root(user: user)));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text('Sign in failed'),
+        ));
+      }
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
@@ -184,22 +205,5 @@ class LoginScreen extends GetView<LoginController> {
         ],
       ),
     );
-  }
-
-  Future signIn() async {
-    final user = await GoogleSignInApi.login();
-    
-    if (user == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Sign in failed')));
-    } else {
-      print("user: " + user.id);
-      print("user: " + user.email);
-
-      print(user);
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => LogggedInPage(user: user),
-      ));
-    }
   }
 }
