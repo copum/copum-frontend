@@ -1,16 +1,12 @@
 import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
-import '../controller/kakao_login.dart';
+import '../controller/kakao_login_controller.dart';
 import 'package:get/get.dart';
 import 'google_login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
 
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             onPressed: () {
-              KakaoLogin().checkLogin();
+              Get.find<LoginController>().checkLogin();
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.yellow,
@@ -136,15 +132,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             label: const Padding(
-              padding: EdgeInsets.only(right: 80),
-              child: Text(
-                " apple로 시작하기",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: "Elice",
-                ),
-              ),
-            ),
+                padding: EdgeInsets.only(right: 80),
+                child: /* GetX<LoginController>(initState: (state) {
+                Get.find<LoginController>().checkLogin();
+              }, builder: (_) {
+                return const Text('test');
+              }), */
+                    SizedBox.shrink()),
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               primary: Colors.white,

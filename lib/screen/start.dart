@@ -1,3 +1,4 @@
+import 'package:copum/router/routes.dart';
 import 'package:copum/screen/login.dart';
 import 'package:copum/screen/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,7 @@ class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-        const Duration(seconds: 2), () => {Get.to(const LoginScreen())});
-
+        const Duration(seconds: 2), (() => Get.toNamed(Routes.HOME)));
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
