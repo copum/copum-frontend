@@ -7,17 +7,17 @@ import 'package:get/get.dart';
 import 'google_login_screen.dart';
 import 'package:http/http.dart' as http;
 
-class ServerResponse extends Response {
-  bool error;
-  String data;
-  String message;
+// class ServerResponse extends Response {
+//   bool error;
+//   String data;
+//   String message;
 
-  ServerResponse({
-    required this.error,
-    required this.message,
-    required this.data,
-  });
-}
+//   ServerResponse({
+//     required this.error,
+//     required this.message,
+//     required this.data,
+//   });
+// }
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
@@ -25,9 +25,9 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     Future signIn() async {
-      final user = await GoogleSignInApi.login();
-      final auth = await user?.authentication;
-      String? accessToken = auth?.accessToken;
+      // final user = await GoogleSignInApi.login();
+      // final auth = await user?.authentication;
+      // String? accessToken = auth?.accessToken;
 
       // final serverResult = await http.get(Uri.parse(
       //     "http://localhost:8000/account/google/login?access_token=${accessToken}"));
@@ -39,15 +39,11 @@ class LoginScreen extends GetView<LoginController> {
       //     content: Text('Sign in failed'),
       //   ));
       // }
-      final test = 1;
-      if (test == 1) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Root(user: user)));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Sign in failed'),
-        ));
-      }
+
+      //이게 서버에 닿기만 하면 됩니다.
+      String access_token = "1234";
+      final serverResult = await http.get(Uri.parse(
+          "http://localhost:8000/account/google/login?access_token=${accessToken}"));
     }
 
     return Scaffold(
