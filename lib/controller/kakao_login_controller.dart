@@ -46,13 +46,12 @@ class LoginController extends GetxController {
 
   loginAA(String accessToken) async {
     final response = await repository.kakaoLogin(accessToken);
-    String successlogin = 'login success.';
 
     print(response);
     if (response['error']) {
       //error: true -> 회원가입 페이지로 넘긴다.
     } else {
-      if (response['message'] == successlogin) {
+      if (response['status'] == 200) {
         // 메인화면 이동
         Get.toNamed('/board');
       } else {

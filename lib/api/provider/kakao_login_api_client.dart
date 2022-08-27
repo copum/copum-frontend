@@ -21,8 +21,9 @@ class KakaoLoginApiClient {
 
   kakaoLogin(String token) async {
     try {
-      final url = Uri.parse('$baseUrl?code=$token');
+      final url = Uri.parse('$baseUrl?access_token=$token');
       print('$url');
+
       var response = await httpClient.get(url);
       print('$response');
       if (response.statusCode == 200) {
@@ -36,5 +37,3 @@ class KakaoLoginApiClient {
     }
   }
 }
-
-//왜 도대체 왜 트루야 
