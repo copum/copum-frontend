@@ -1,8 +1,18 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:copum/api/model/kakao_login_model.dart';
+import 'package:copum/api/repository/kakao_login_repository.dart';
+import 'package:copum/router/routes.dart';
+import 'package:copum/screen/login_screen.dart';
+import 'package:copum/screen/root.dart';
+import 'package:copum/widget/password_hint.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 
+//애뮬레이터에서 돌릴때 10.0.2.2 아닐땐 실제 url 사용
 const baseUrl = 'http://10.0.2.2:8000/account/kakao/login';
 
 class KakaoLoginApiClient {
@@ -14,18 +24,17 @@ class KakaoLoginApiClient {
       final url = Uri.parse('$baseUrl?code=$token');
       print('$url');
       var response = await httpClient.get(url);
+      print('$response');
       if (response.statusCode == 200) {
-        Iterable jsonResponse = json.decode(response.body);
-        List<KakaoLoginModel> listMyModel = jsonResponse
-            .map((model) => KakaoLoginModel.fromJson(model))
-            .toList();
-        // listMyModel.removeRange(2, listMyModel.length);
-        // List<MyModel> listMyModel = new List<MyModel>.empty();
-        return listMyModel;
+        final result = jsonDecode(response.body);
+        print('$result');
+        return result;
       } else
-        print('erro');
+        print('error');
     } catch (e) {
       print('error: ${e.toString()}');
     }
   }
 }
+
+//왜 도대체 왜 트루야 
