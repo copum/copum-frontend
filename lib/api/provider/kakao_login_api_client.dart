@@ -27,7 +27,7 @@ class KakaoLoginApiClient {
       var response = await httpClient.get(url);
       print('$response');
       if (response.statusCode == 200) {
-        final result = jsonDecode(response.body);
+        final result = jsonDecode(utf8.decode(response.bodyBytes));
         print('$result');
         return result;
       } else
@@ -37,3 +37,21 @@ class KakaoLoginApiClient {
     }
   }
 }
+
+// class GoogleLoginApiClient {
+//   late final http.Client httpClient;
+//   GoogleLoginApiClient({required this.httpClient});
+
+//   googleLogin(String accessToken) async {
+//     try {
+//       final url = Uri.parse(
+//           'http://10.0.2.2:8000/account/google/login?access_token=$accessToken');
+
+//       var response = await httpClient.get(url);
+
+//       if (response.statusCode == 200) {
+//         final result = jsonDecode(response.body);
+//       }
+//     } catch (e) {}
+//   }
+// }

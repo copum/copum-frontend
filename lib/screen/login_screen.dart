@@ -39,11 +39,11 @@ class LoginScreen extends GetView<LoginController> {
       //     content: Text('Sign in failed'),
       //   ));
       // }
-
+      await GoogleSignInApi.login();
       //이게 서버에 닿기만 하면 됩니다.
       String accessToken = "1234";
       final serverResult = await http.get(Uri.parse(
-          "http://localhost:8000/account/google/login?access_token=${accessToken}"));
+          "http://10.0.2.2:8000/account/google/login?access_token=$accessToken"));
     }
 
     return Scaffold(

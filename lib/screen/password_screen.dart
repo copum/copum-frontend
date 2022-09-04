@@ -156,17 +156,6 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 ),
               ),
             ),
-            // Container(
-            //   margin: const EdgeInsets.only(left: 20.0, top: 4),
-            //   child: const Text(
-            //     '영문,숫자,특수문자 중 2개의 조합이 필요해요. \n8자리 이상의 비밀번호가 필요해요.',
-            //     style: TextStyle(
-            //       fontSize: 12,
-            //       color: Colors.white,
-            //       letterSpacing: 0.25,
-            //     ),
-            //   ),
-            // ),
             const SizedBox(
               height: 16,
             ),
