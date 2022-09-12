@@ -1,17 +1,22 @@
-import 'package:copum/controller/root_controller.dart';
+import 'package:copum/api/model/boardmodel.dart';
+import 'package:copum/api/provider/boardapi.dart';
+import 'package:copum/api/provider/kakao_login_api_client.dart';
+import 'package:copum/controller/board_controller.dart';
+import 'package:copum/controller/root_page_controller.dart';
 import 'package:copum/src/question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import '../src/Search.dart';
-import '../src/home.dart';
+import '../src/board_page.dart';
 import '../src/profile.dart';
+import 'package:get/get.dart';
 
-class Root extends GetView<RootController> {
-  final user;
-  Root({Key? key, required this.user}) : super(key: key);
-
+class HomeScreen extends GetView<RootPageController> {
   @override
   Widget build(BuildContext context) {
+    List<BoardModel> boardModel = [];
+    Get.find<BoardController>().fetchBoard();
+
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.black,
@@ -27,19 +32,53 @@ class Root extends GetView<RootController> {
           children: [
             IndexedStack(
               index: controller.rootPageIndex.value,
-              children: const [
-                Home(),
+              children: [
+                BoardPage(),
                 Search(),
                 Profile(),
                 Question(),
               ],
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 600),
-              child: const Divider(
-                height: 1,
-                color: Colors.grey,
-              ),
+            Column(
+              // board data test
+              children: [
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: boardModel.length,
+                  separatorBuilder: (context, index) => const Divider(),
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        height: 100,
+                        child: Column(
+                          children: [
+                            Text(
+                              boardModel[index].title,
+                              style: const TextStyle(
+                                color: Colors.red,
+                                fontSize: 12,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(boardModel[index].content),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 600),
+                  child: const Divider(
+                    height: 1,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
