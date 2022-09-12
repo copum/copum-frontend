@@ -1,4 +1,6 @@
 // 회원가입 페이지
+import 'package:copum/api/provider/boardapi.dart';
+import 'package:copum/controller/board_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -17,7 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool name_length = false;
   final _formKey = GlobalKey<FormState>();
 
-  bool validatePassword(String name) {
+  bool validateUserName(String name) {
     String registerName = name.trim();
     if (registerName.isEmpty) {
       name_length = false;
@@ -137,7 +139,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (!name_length) {
-                      Get.toNamed('/board');
+                      Get.toNamed('/home');
                     }
                   }, //버튼 이벤트작성
                   style: ElevatedButton.styleFrom(

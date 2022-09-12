@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widget/make_id_hint.dart';
 import '../widget/password_hint.dart';
+import 'package:get/get.dart';
 
 class AgreementScreen extends StatelessWidget {
   const AgreementScreen({Key? key}) : super(key: key);
@@ -155,7 +156,7 @@ class _AgreementPageState extends State<AgreementPage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (checkedAll()) {
-                      //다음 버튼 클릭 시 넘어갈 페이지 설정 (get.to)
+                      Get.toNamed('/register');
                     }
                   },
                   style: ElevatedButton.styleFrom(

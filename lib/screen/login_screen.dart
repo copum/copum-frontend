@@ -1,4 +1,4 @@
-import 'package:copum/screen/root.dart';
+import 'package:copum/screen/home_screen.dart';
 import 'package:path/path.dart' as Path;
 import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
