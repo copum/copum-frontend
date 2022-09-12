@@ -43,7 +43,7 @@ class LoginController extends GetxController {
     }
   }
 
-  kakaologinControl(String accessToken) async {
+  void kakaologinControl(String accessToken) async {
     final response = await repository.kakaoLogin(accessToken);
 
     //print(response);
