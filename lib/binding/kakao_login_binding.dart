@@ -10,7 +10,7 @@ class HomeBinding implements Bindings {
     Get.lazyPut<LoginController>(() {
       return LoginController(
           repository: KakaoLoginRepository(
-              apiClient: KakaoLoginApiClient(httpClient: http.Client())));
+              apiClient: CopumApiClient(httpClient: http.Client())));
     });
   }
 }
