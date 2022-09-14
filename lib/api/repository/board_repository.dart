@@ -9,7 +9,7 @@ class BoardRepository {
 
   BoardRepository({required this.apiClient});
 
-  fetchBoard() {
+  dynamic fetchBoard() {
     return apiClient.fetchData();
   }
 }

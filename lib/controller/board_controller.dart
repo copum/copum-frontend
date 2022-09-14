@@ -9,13 +9,15 @@ class BoardController extends GetxController {
   final BoardRepository repository;
   BoardController({required this.repository});
 
+  var boardModel = [].obs;
+
   // repository.fetchBoard().then((data) {
   //   print('boardList size: ${data?.length}');
   //   boardList = data;
   // });
 
-  Future<List<BoardModel>> fetchBoard() async {
-    final boardList = await repository.fetchBoard();
-    return boardList;
+  void fetchBoard() async {
+    boardModel.value = await repository.fetchBoard(); //.value
+    print('fetchBoard: ${boardModel.length}');
   }
 }
