@@ -87,7 +87,7 @@ class _AgreementPageState extends State<AgreementPage> {
               margin: const EdgeInsets.only(left: 36, top: 50),
               child: Row(
                 children: [
-                  const MakeIdHint('(필수)', ' 서비스 이용약관'),
+                  const AgreementHint('(필수)', ' 서비스 이용약관'),
                   Padding(
                     padding: const EdgeInsets.only(left: 110),
                     child: Checkbox(
@@ -107,7 +107,7 @@ class _AgreementPageState extends State<AgreementPage> {
               margin: const EdgeInsets.only(left: 36, top: 30),
               child: Row(
                 children: [
-                  const MakeIdHint('(필수)', ' 개인정보 수집/이용 동의'),
+                  const AgreementHint('(필수)', ' 개인정보 수집/이용 동의'),
                   Padding(
                     padding: const EdgeInsets.only(left: 54),
                     child: Checkbox(
