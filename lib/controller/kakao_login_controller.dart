@@ -53,7 +53,7 @@ class LoginController extends GetxController {
     } else {
       if (response['status'] == '200') {
         // 메인화면 이동
-        Get.toNamed('/board');
+        Get.toNamed('/home');
       } else {
         // error : false , status 200 이 아닌경우 ,,
       }
