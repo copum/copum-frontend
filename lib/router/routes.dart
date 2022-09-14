@@ -1,3 +1,4 @@
+import 'package:copum/api/model/boardmodel.dart';
 import 'package:copum/binding/board_binding.dart';
 import 'package:copum/binding/root_page_binding.dart';
 import 'package:copum/controller/root_page_controller.dart';
@@ -17,6 +18,9 @@ abstract class Routes {
   static const HOME = '/home'; // 게시판 화면
   static const REGISTER = '/register'; // 회원가입 화면
   static const AGREEMENT = '/agreement'; // 약관동의 화면
+  static const QUESTION = '/question'; // 질문 화면
+  static const SEARCH = '/search'; // 검색 화면
+  static const PROFILE = '/profile'; //프로필정보 화면
 }
 
 class AppPages {
