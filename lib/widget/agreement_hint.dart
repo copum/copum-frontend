@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MakeIdHint extends StatefulWidget {
+class AgreementHint extends StatefulWidget {
   final String first;
   final String second;
 
-  const MakeIdHint(this.first, this.second, {Key? key}) : super(key: key);
+  const AgreementHint(this.first, this.second, {Key? key}) : super(key: key);
 
   @override
-  State<MakeIdHint> createState() => _MakeIdHintState();
+  State<AgreementHint> createState() => _AgreementHintState();
 }
 
-class _MakeIdHintState extends State<MakeIdHint> {
+class _AgreementHintState extends State<AgreementHint> {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
