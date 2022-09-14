@@ -19,3 +19,23 @@ class KakaoLoginModel {
     return data;
   }
 }
+
+// test model
+
+class Test {
+  String title;
+  //late List<String> candidates;
+  String content;
+
+  Test({required this.title, required this.content});
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'content': content,
+      };
+
+  Test.fromJson(Map<String, dynamic> json)
+      : title = json['title'],
+        // candidates = json['body'].toString().split('/'),
+        content = json['content'];
+}
