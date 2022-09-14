@@ -11,12 +11,10 @@ import '../src/board_page.dart';
 import '../src/profile.dart';
 import 'package:get/get.dart';
 
+//게시판 첫화면(메인화면 ?)
 class HomeScreen extends GetView<RootPageController> {
   @override
   Widget build(BuildContext context) {
-    List<BoardModel> boardModel = [];
-    Get.find<BoardController>().fetchBoard();
-
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.black,
@@ -42,37 +40,8 @@ class HomeScreen extends GetView<RootPageController> {
             Column(
               // board data test
               children: [
-                ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: boardModel.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        height: 100,
-                        child: Column(
-                          children: [
-                            Text(
-                              boardModel[index].title,
-                              style: const TextStyle(
-                                color: Colors.red,
-                                fontSize: 12,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(boardModel[index].content),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
                 Container(
-                  margin: const EdgeInsets.only(top: 600),
+                  margin: const EdgeInsets.only(top: 10),
                   child: const Divider(
                     height: 1,
                     color: Colors.grey,
