@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widget/make_id_hint.dart';
+import '../widget/agreement_hint.dart';
 import '../widget/password_hint.dart';
 import 'package:get/get.dart';
 
