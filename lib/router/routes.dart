@@ -3,7 +3,9 @@ import 'package:copum/binding/board_binding.dart';
 import 'package:copum/binding/root_page_binding.dart';
 import 'package:copum/controller/root_page_controller.dart';
 import 'package:copum/screen/agreement.dart';
+import 'package:copum/screen/board_screen.dart';
 import 'package:copum/screen/login_screen.dart';
+import 'package:copum/screen/quill_542ver.dart';
 import 'package:copum/screen/register.dart';
 import 'package:copum/screen/home_screen.dart';
 import 'package:copum/screen/start.dart';
@@ -21,18 +23,24 @@ abstract class Routes {
   static const QUESTION = '/question'; // 질문 화면
   static const SEARCH = '/search'; // 검색 화면
   static const PROFILE = '/profile'; //프로필정보 화면
+  static const BOARD = '/board';
 }
 
 class AppPages {
   static final pages = [
-    GetPage(name: Routes.INTRO, page: () => const StartPage()),
     GetPage(
-        name: Routes.LOGIN,
-        page: () => const LoginScreen(),
-        binding: HomeBinding()),
-    GetPage(
-        name: Routes.HOME, page: () => HomeScreen(), binding: BoardBinding()),
-    GetPage(name: Routes.REGISTER, page: () => const RegisterScreen()),
-    GetPage(name: Routes.AGREEMENT, page: (() => const AgreementScreen())),
+        name: Routes.BOARD,
+        page: () => const BoardScreen(),
+        // page: () => const Quill_542ver(),
+        binding: BoardBinding()),
+    // GetPage(name: Routes.INTRO, page: () => const StartPage()),
+    // GetPage(
+    //     name: Routes.LOGIN,
+    //     page: () => const LoginScreen(),
+    //     binding: HomeBinding()),
+    // GetPage(
+    //     name: Routes.HOME, page: () => HomeScreen(), binding: BoardBinding()),
+    // GetPage(name: Routes.REGISTER, page: () => const RegisterScreen()),
+    // GetPage(name: Routes.AGREEMENT, page: (() => const AgreementScreen())),
   ];
 }

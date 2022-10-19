@@ -56,8 +56,8 @@ class LogggedInPage extends StatelessWidget {
                 height: 8,
               ),
               Text(
-                'Email: ' + user.email!,
-                style: TextStyle(color: Colors.white, fontSize: 24),
+                'Email: ' + user.email,
+                style: TextStyle(color: Colors.white, fontSize: 24),// 01067359562
               ),
             ],
           ),

@@ -1,8 +1,8 @@
 import 'package:copum/binding/kakao_login_binding.dart';
-import 'package:copum/controller/root_controller.dart';
 import 'package:copum/router/routes.dart';
+import 'package:copum/screen/board_screen.dart';
 import 'package:copum/screen/login_screen.dart';
-import 'package:copum/screen/root.dart';
+import 'package:copum/screen/quill_542ver.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:get/get.dart';
@@ -17,18 +17,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      getPages: AppPages.pages,
-      initialRoute: Routes.INTRO,
-      theme: ThemeData(primaryColor: Colors.grey),
-      debugShowCheckedModeBanner: false,
-      initialBinding: BindingsBuilder(() {
-        Get.put(RootController());
-      }),
-      //home: StartPage(),
-      //home: const LoginScreen(),
-      // home: const Root(),
-      //home: const Root(),
-    );
+    return GetMaterialApp(home: const BoardScreen()
+    // return GetMaterialApp(home: const Quill_542ver()
+
+    // getPages: AppPages.pages,
+        // initialRoute: Routes.INTRO,
+        // theme: ThemeData(primaryColor: Colors.grey),
+        // debugShowCheckedModeBanner: false,
+        // initialBinding: BindingsBuilder(() {
+        //   Get.put(RootController());
+        // }),
+        //home: StartPage(),
+        //home: const LoginScreen(),
+        // home: const Root(),
+        //home: const Root(),
+        );
   }
 }
