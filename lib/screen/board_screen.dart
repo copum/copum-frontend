@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:dio/dio.dart';
+// import 'package:get/get.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart'; // category
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
@@ -24,8 +24,38 @@ class Category {
 }
 
 class _BoardScreen extends State<BoardScreen> {
+  String title = '';
+  MultipartFile? img;
+  Future<void> onPress() async {
+    var url = "http://localhost:8000/question/";
+    String str = _controller.document.toDelta().toJson().toString();
+    var dio = Dio();
+
+    dio.options.contentType = 'multipart/form-data';
+    var formData = new FormData.fromMap({
+      'Question_category1': _selectedCategory[0]!.id,
+      'Question_category2': _selectedCategory.length >= 2 ? _selectedCategory[1]!.id : null,
+      'Question_category3': _selectedCategory.length >= 3 ? _selectedCategory[2]!.id : null,
+      'Question_category4': _selectedCategory.length >= 4 ? _selectedCategory[3]!.id : null,
+      'Question_title':title,
+      'Question_image': img ?? null,
+      'Question_content': str,
+    });
+    try{
+      var response = await dio.post(url, data: formData);
+      print(response.data.toString());
+      print("success");
+    }catch(e){
+      print(e.toString());
+      print("error");
+    }
+
+
+  }
+
   FocusNode? editorFocus;
   bool editorFocused = false;
+
   void initState(){
     super.initState();
     editorFocus = FocusNode();
@@ -40,57 +70,36 @@ class _BoardScreen extends State<BoardScreen> {
   }
 
 
-
   QuillController _controller = QuillController.basic();
-  String title = '';
   static final List<Category> _categories = [
-    const Category(id: 1, name: '프로그래밍 기초'),
-    const Category(id: 2, name: 'PHP'),
-    const Category(id: 3, name: 'JSP'),
-    const Category(id: 4, name: 'PYTHON'),
-    const Category(id: 5, name: 'GO'),
-    const Category(id: 6, name: 'SQL'),
-    const Category(id: 7, name: 'JAVASCRIPT'),
-    const Category(id: 8, name: 'DART'),
-    const Category(id: 9, name: 'R'),
-    const Category(id: 10, name: 'R'),
-    const Category(id: 11, name: '프로그래밍 기초'),
-    const Category(id: 12, name: 'PHP'),
-    const Category(id: 13, name: 'JSP'),
-    const Category(id: 14, name: 'PYTHON'),
-    const Category(id: 15, name: 'GO'),
-    const Category(id: 16, name: 'SQL'),
-    const Category(id: 17, name: 'JAVASCRIPT'),
-    const Category(id: 18, name: 'DART'),
-    const Category(id: 19, name: 'R'),
+    const Category(id: 1, name: 'Dart'),
+    const Category(id: 2, name: 'Php'),
+    const Category(id: 3, name: 'Python'),
+    const Category(id: 4, name: 'Java'),
+    const Category(id: 5, name: 'Go'),
+    const Category(id: 6, name: 'MySQL'),
+    const Category(id: 7, name: 'JavaScript'),
   ];
 
   final _items = _categories
       .map((category1) => MultiSelectItem<Category?>(category1, category1.name))
       .toList();
-  List<Object?> _selectedCategory = [];
+  List<Category?> _selectedCategory = [];
   MultiSelectChipDisplay<Category> chip = MultiSelectChipDisplay<Category>(
     textStyle:
         TextStyle(color: Colors.yellow, backgroundColor: Colors.red), // 칩 글자 색
     chipColor: Color.fromARGB(255, 56, 59, 61),
   );
-  void createPost(
-    title,
-    body,
-  ) async {
-    var url = Uri.parse(
-      'http://localhost:8080/post',
-    );
-    var result = await http.post(url, body: {title: title, body: body});
-  }
-
   final _multiSelectKey = GlobalKey<FormFieldState>();
+
 
   Future<String> _onImagePickCallback(File file) async {
     // Copies the picked file from temporary cache to applications directory
     final appDocDir = await getApplicationDocumentsDirectory();
     final copiedFile =
     await file.copy('${appDocDir.path}/${basename(file.path)}');
+
+    img = MultipartFile.fromFileSync(file.path,  contentType: new MediaType("image", "jpg"));
     return copiedFile.path.toString();
   }
 
@@ -111,7 +120,7 @@ class _BoardScreen extends State<BoardScreen> {
             new IconButton(
               icon: new Icon(Icons.send),
               tooltip: 'send',
-              onPressed: (){},
+              onPressed: onPress,
             )
           ],
         ),
@@ -130,7 +139,7 @@ class _BoardScreen extends State<BoardScreen> {
                   },
                   items: _items,
                   title: Text("Category"),
-                  initialValue: [..._selectedCategory],
+                  initialValue: [],
                   selectedColor: Colors.orange,
                   chipDisplay: chip,
                   decoration: BoxDecoration(
@@ -157,15 +166,16 @@ class _BoardScreen extends State<BoardScreen> {
                     print(test);
                   },
                   onConfirm: (results) {
-                    if(results.length > 4){
-                      print("error");
-                      results = [];
-                      _selectedCategory = [];
-                    }else {
-                      _selectedCategory = results;
-                    }
-                    print("selected category");
-                    print(_selectedCategory);
+                    _selectedCategory = results.cast<Category?>();
+                    // if(results.length > 4){
+                    //   print("error");
+                    //   results = [];
+                    //   _selectedCategory = [];
+                    // }else {
+                    //   _selectedCategory = results.cast<Category?>();
+                    // }
+                    // print("selected category");
+                    // print(_selectedCategory);
                   },
                 ),
                 SizedBox(height: 30),
@@ -180,6 +190,9 @@ class _BoardScreen extends State<BoardScreen> {
                   height: 10,
                 ),
                 TextField(
+                  onChanged: (data){
+                    title = data;
+                  },
                   style : const TextStyle(color: Colors.white),
                   decoration: const InputDecoration(
                       hintText: '제목',
