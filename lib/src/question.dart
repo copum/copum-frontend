@@ -138,8 +138,7 @@ class _BoardScreen extends State<QuestionScreen> {
             onPressed: () {
               onPress();
               setState(() {});
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()));
+              Navigator.pushNamed(context, '/home');
             },
           )
         ],
