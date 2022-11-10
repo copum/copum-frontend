@@ -1,6 +1,9 @@
 import 'package:copum/api/model/boardmodel.dart';
 import 'package:copum/controller/board_controller.dart';
+import 'package:copum/controller/root_page_controller.dart';
+import 'package:copum/widget/post_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/route_manager.dart';
@@ -8,31 +11,46 @@ import 'package:get/get.dart';
 import 'package:copum/widget/category_menu.dart';
 
 class BoardPage extends GetView<BoardController> {
-  BoardPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CategoryMenu(),
-        GetX<BoardController>(initState: (state) {
-          Get.find<BoardController>().fetchBoard();
-        }, builder: (_) {
-          return _.boardModel.length < 1
-              ? CircularProgressIndicator()
-              : ListView.builder(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        _.boardModel.value[index].title ?? 'a',
-                        style: const TextStyle(color: Colors.red),
+        const SizedBox(
+          height: 20,
+        ),
+        GetX<BoardController>(
+          initState: (state) {
+            Get.find<BoardController>().fetchBoard();
+          },
+          builder: (_) {
+            return _.boardModel.length < 1
+                ? CircularProgressIndicator()
+                : SizedBox(
+                    height: 580,
+                    child: Obx(
+                      () => ListView.separated(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return SingleChildScrollView(
+                            child: PostWidget(
+                              _.boardModel.value[index].title,
+                              _.boardModel.value[index].content,
+                              _.boardModel.value[index].answerCounting,
+                              _.boardModel.value[index].questionCounting,
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => const Divider(
+                          height: 40,
+                          color: Colors.grey,
+                        ),
+                        itemCount: _.boardModel.value.length,
                       ),
-                    );
-                  },
-                  itemCount: _.boardModel.value.length,
-                );
-        }),
+                    ));
+          },
+        ),
       ],
     );
   }
