@@ -7,7 +7,6 @@ import 'package:copum/screen/home_screen.dart';
 import 'package:copum/src/board_page.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-// import 'package:get/get.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
@@ -39,7 +38,7 @@ class _BoardScreen extends State<QuestionScreen> {
 
   Future<void> onPress() async {
     var url = "http://10.0.2.2:8000/question/";
-    String str = _controller.document.toDelta().toJson().toString();
+    var str = jsonEncode(_controller.document.toDelta().toJson());
     var dio = Dio();
 
     dio.options.contentType = 'multipart/form-data';
