@@ -18,6 +18,6 @@ class BoardController extends GetxController {
 
   void fetchBoard() async {
     boardModel.value = await repository.fetchBoard(); //.value
-    print('fetchBoard: ${boardModel.length}');
+    // print('ret: ${boardModel.value}');
   }
 }
