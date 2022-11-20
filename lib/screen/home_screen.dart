@@ -19,14 +19,14 @@ class HomeScreen extends GetView<RootPageController> {
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          centerTitle: true,
-          title: const Text(
-            '코품',
-            style: TextStyle(fontFamily: 'Elice', fontSize: 24),
-          ),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.black,
+        //   centerTitle: true,
+        //   title: const Text(
+        //     '코품',
+        //     style: TextStyle(fontFamily: 'Elice', fontSize: 24),
+        //   ),
+        // ),
         body: Column(
           children: [
             Expanded(
