@@ -9,8 +9,6 @@ import 'package:get/get.dart';
 
 import '../controller/board_controller.dart';
 
-String? title;
-
 class PostWidget extends GetView<BoardController> {
   int? id;
   String title;
@@ -61,13 +59,14 @@ class PostWidget extends GetView<BoardController> {
   Widget postContent() {
     return GestureDetector(
       onTap: () {
-        print('$title');
+        Get.toNamed('/answer');
       },
       child: Text(
         content,
         maxLines: 3,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(fontSize: 16, color: Colors.white),
+        // style: TextStyle(fontsize),
       ),
     );
   }
