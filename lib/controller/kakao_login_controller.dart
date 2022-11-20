@@ -48,10 +48,11 @@ class LoginController extends GetxController {
 
     //print(response);
     if (response['error']) {
-      //error: true -> 회원가입 페이지로 넘긴다.
-      Get.toNamed('/agreement');
+      // Get.toNamed('/agreement');
+      //error ==> ??? Toast?
+
     } else {
-      if (response['status'] == '200') {
+      if (response['status'] == 200) {
         // 메인화면 이동
         Get.toNamed('/home');
       } else {
