@@ -40,10 +40,6 @@ class LoginScreen extends GetView<LoginController> {
       //   ));
       // }
       await GoogleSignInApi.login();
-      //이게 서버에 닿기만 하면 됩니다.
-      String accessToken = "1234";
-      final serverResult = await http.get(Uri.parse(
-          "http://10.0.2.2:8000/account/google/login?access_token=$accessToken"));
     }
 
     return Scaffold(
@@ -147,68 +143,6 @@ class LoginScreen extends GetView<LoginController> {
               ),
             ),
             onPressed: signIn,
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              minimumSize: const Size(320, 48),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              elevation: 0.0,
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          ElevatedButton.icon(
-            icon: const Padding(
-              padding: EdgeInsets.only(right: 80),
-              child: Icon(
-                Icons.apple,
-                size: 18.0,
-                color: Colors.black,
-              ),
-            ),
-            label: const Padding(
-                padding: EdgeInsets.only(right: 80),
-                child: /* GetX<LoginController>(initState: (state) {
-                Get.find<LoginController>().checkLogin();
-              }, builder: (_) {
-                return const Text('test');
-              }), */
-                    SizedBox.shrink()),
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              minimumSize: const Size(320, 48),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              elevation: 0.0,
-            ),
-          ),
-          const SizedBox(
-            height: 12.0,
-          ),
-          ElevatedButton.icon(
-            icon: const Padding(
-              padding: EdgeInsets.only(right: 80),
-              child: Icon(
-                Icons.email,
-                size: 18.0,
-                color: Colors.black,
-              ),
-            ),
-            label: const Padding(
-              padding: EdgeInsets.only(right: 80),
-              child: Text(
-                "email로 시작하기",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: "Elice",
-                ),
-              ),
-            ),
-            onPressed: () {},
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               minimumSize: const Size(320, 48),
