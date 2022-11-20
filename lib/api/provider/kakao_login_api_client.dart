@@ -16,7 +16,7 @@ import 'package:copum/main.dart';
 
 //애뮬레이터에서 돌릴때 10.0.2.2 아닐땐 실제 url 사용
 const baseUrl = 'http://10.0.2.2:8000/account/kakao/login'; //카카오
-const boardUrl = 'http://10.0.2.2:8000/account/test/4'; //게시판
+// const baseUrl = 'http://localhost:8000/account/kakao/login';
 
 class CopumApiClient {
   final http.Client httpClient;
