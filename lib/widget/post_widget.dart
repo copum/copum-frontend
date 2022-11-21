@@ -59,7 +59,12 @@ class PostWidget extends GetView<BoardController> {
   Widget postContent() {
     return GestureDetector(
       onTap: () {
-        Get.toNamed('/answer');
+        Get.toNamed('/answer', arguments: {
+          'title': title,
+          'content': content,
+          'answerCounting': answerCounting,
+          'questionCounting': questionCounting
+        });
       },
       child: Text(
         content,
