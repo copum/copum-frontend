@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:copum/widget/category_menu.dart';
@@ -24,6 +24,10 @@ class BoardPage extends GetView<BoardController> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
+        title: const Text(
+          '코품',
+        ),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -47,6 +51,7 @@ class BoardPage extends GetView<BoardController> {
                           itemBuilder: (context, index) {
                             try {
                               dynamic A = _.boardModel[index].content;
+                              print(_.boardModel.indexOf(A));
                               print('aaa2');
                               var myJSON = jsonDecode(A);
                               print('bbb: $myJSON');
