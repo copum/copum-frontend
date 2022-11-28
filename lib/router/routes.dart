@@ -1,4 +1,5 @@
 import 'package:copum/api/model/boardmodel.dart';
+import 'package:copum/binding/answer_binding.dart';
 import 'package:copum/binding/board_binding.dart';
 import 'package:copum/binding/root_page_binding.dart';
 import 'package:copum/controller/root_page_controller.dart';
@@ -16,6 +17,8 @@ import 'package:get/get.dart';
 import '../binding/kakao_login_binding.dart';
 import 'package:copum/screen/question_screen.dart';
 
+import '../screen/answer_screen1.dart';
+
 abstract class Routes {
   static const INTRO = '/'; // 인트로 화면
   static const LOGIN = '/login'; // (kakao,google 로그인)홈화면
@@ -27,6 +30,7 @@ abstract class Routes {
   static const PROFILE = '/profile'; //프로필정보 화면
   static const BOARD = '/board';
   static const ANSWER = '/answer';
+  static const ANSWER2 = '/answer2';
 }
 
 class AppPages {
@@ -43,11 +47,10 @@ class AppPages {
         binding: HomeBinding()),
     GetPage(
         name: Routes.HOME, page: () => HomeScreen(), binding: BoardBinding()),
-    // GetPage(name: Routes.REGISTER, page: () => const RegisterScreen()),
-    // GetPage(name: Routes.AGREEMENT, page: (() => const AgreementScreen())),
     GetPage(
         name: Routes.ANSWER,
-        page: () => AnswerScreen(),
-        binding: BoardBinding())
+        page: () => AnswerMain(),
+        binding: AnswerBinding()),
+    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen2()))
   ];
 }
