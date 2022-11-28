@@ -166,7 +166,9 @@ class AnswerWidget extends GetView<BoardController> {
                   width: 16,
                 ),
                 ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed('/answer2');
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.greenAccent,
                       minimumSize: const Size(160, 44),
@@ -193,6 +195,7 @@ class AnswerWidget extends GetView<BoardController> {
     );
   }
 }
+
 
 /* category 1,2,3,4 == null -> 
 category1,2,3,4[]
