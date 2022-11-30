@@ -1,6 +1,6 @@
 import 'package:copum/api/model/boardmodel.dart';
 import 'package:copum/api/provider/boardapi.dart';
-import 'package:copum/controller/answer_controller%20copy.dart';
+import 'package:copum/controller/answer_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,6 +15,7 @@ class TestWidget extends GetView<AnswerController> {
   String title;
   String content;
   String? answer_created_at;
+  String? image;
 
   TestWidget(this.title, this.content, {Key? key}) : super(key: key);
 
@@ -31,34 +32,6 @@ class TestWidget extends GetView<AnswerController> {
       ),
     );
   }
-
-// 프로필이름 , 시간
-  Widget answerBody() {
-    return Column(
-      children: [
-        Text(
-          Get.arguments['title'],
-          style: const TextStyle(fontSize: 12, color: Colors.white),
-        ),
-        const SizedBox(
-          height: 3,
-        ),
-        Text(
-          Get.arguments['title'],
-          style: const TextStyle(fontSize: 12, color: Colors.grey),
-        ),
-      ],
-    );
-  }
-
-// 포스트 제목 추가
-  // Widget answerTitle() {
-  //   return Text(
-  //     Get.arguments['title'],
-  //     style: const TextStyle(fontSize: 16, color: Colors.white),
-  //     // style: TextStyle(fontsize),
-  //   );
-  // }
 
 // 포스트 내용
   Widget answerContent(String content) {
@@ -93,17 +66,23 @@ class TestWidget extends GetView<AnswerController> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 26, right: 26),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            profileImage(),
-            Container(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              color: Colors.white70,
-              height: 440,
-              width: 280,
-              margin: const EdgeInsets.only(right: 60),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          profileImage(),
+          Container(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            color: Colors.white70,
+            height: 440,
+            width: 280,
+            margin: const EdgeInsets.only(right: 60),
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed('/', arguments: {
+                  'title': title,
+                  'content': content,
+                });
+              },
               child: Column(
                 children: [
                   const SizedBox(
@@ -144,13 +123,12 @@ class TestWidget extends GetView<AnswerController> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
-
 /* category 1,2,3,4 == null -> 
 category1,2,3,4[]
 
