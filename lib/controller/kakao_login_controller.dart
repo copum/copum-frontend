@@ -50,7 +50,6 @@ class LoginController extends GetxController {
     if (response['error']) {
       // Get.toNamed('/agreement');
       //error ==> ??? Toast?
-
     } else {
       if (response['status'] == 200) {
         // 메인화면 이동

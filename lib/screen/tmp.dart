@@ -461,3 +461,240 @@ class _BoardScreen extends State<BoardScreen> {
 }
 
 * */
+
+
+/*
+* import 'package:flutter/material.dart' ;
+import 'dart:convert';
+import 'package:copum/controller/board_controller.dart';
+import 'package:copum/widget/post_widget.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:flutter_quill/flutter_quill.dart' hide Text;
+
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SearchScreen> createState() => _SearchScreen();
+}
+
+class Category {
+  final int id;
+  final String name;
+
+  const Category({required this.id, required this.name});
+
+  factory Category.fromJson(Map<String, dynamic> category) {
+    return Category(id: category["id"], name: category["category_name"]);
+  }
+}
+
+class CategoryList {
+  final List<Category> categories;
+
+  const CategoryList({required this.categories});
+
+  factory CategoryList.fromJson(List<Category> list) {
+    List<Category> categories = <Category>[];
+
+    return new CategoryList(
+      categories: list,
+    );
+  }
+}
+
+class _SearchScreen extends State<SearchScreen> {
+
+  List<Category>? _categories ;
+  QuillController _controller = QuillController.basic();
+
+  String? search = '';
+  void initState ()  {
+    super.initState();
+  }
+  // List<Category?> _selectedCategory = [];
+  // MultiSelectChipDisplay<Category> chip = MultiSelectChipDisplay<Category>(
+  //   textStyle:
+  //   TextStyle(color: Colors.yellow, backgroundColor: Colors.red), // 칩 글자 색
+  //   chipColor: Color.fromARGB(255, 56, 59, 61),
+  // );
+  //
+  // Stream<List<Category>> fetchCategory() {
+  //   late final StreamController<List<Category>> controller;
+  //   controller = StreamController<List<Category>>(
+  //     onListen: () async {
+  //       final response = await http.get(Uri.parse('http://localhost:8000/category'));
+  //         final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+  //       controller.add(parsed.map<Category>((json) => Category.fromJson(json)).toList());
+  //
+  //       await controller.close();
+  //     },
+  //   );
+  //   return controller.stream;
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text(
+          '검색',
+          style: TextStyle(
+            fontFamily: 'Elice',
+            fontSize: 18,
+          ),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [],
+      ),
+      body: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+          child: Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                TextField(
+                  onSubmitted: (data){
+                    print("ontab"+data);
+                    // fetchCategory();
+                  },
+
+                  decoration: InputDecoration(
+                      // suffixIcon: Icon(Icons.cancel),
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          print("remove");
+                          search = '';
+                        },
+                        icon: const Icon(Icons.cancel),
+                      ),
+                      hintText: '제목/내용',
+                      hintStyle: TextStyle(color: Colors.grey),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderSide: BorderSide(width: 0))),
+                ),
+                SizedBox(height: 10,),
+                GetX<BoardController>(
+                  initState: (state) {
+                    Get.find<BoardController>().fetchBoard();
+                  },
+                  builder: (_) {
+                    return _.boardModel.length < 1
+                        ? CircularProgressIndicator()
+                        : SizedBox(
+                        height: 580,
+                        child: Obx(
+                              () => ListView.separated(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              try {
+                                dynamic A = _.boardModel[index].content;
+                                print('aaa2');
+                                var myJSON = jsonDecode(A);
+                                print('bbb: $myJSON');
+                                _controller = QuillController(
+                                    document: Document.fromJson(myJSON),
+                                    selection:
+                                    TextSelection.collapsed(offset: 0));
+                                var a = _controller.document.toPlainText();
+                                // print('values: $myJSON');
+                                // print('$a');
+                                _.boardModel.value[index].content = a;
+                                // return _.boardModel[index].content;
+                              } catch (e) {
+                                print(e);
+                              }
+                              // dynamic _controller = QuillController(
+                              // document: Document.fromJson(myJSON),``
+                              // selection: TextSelection.collapsed(offset: 0));
+                              return SingleChildScrollView(
+                                child: PostWidget(
+                                  _.boardModel.value[index].title,
+                                  _.boardModel.value[index].content,
+                                  _.boardModel.value[index].answerCounting,
+                                  _.boardModel.value[index].questionCounting,
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) => const Divider(
+                              height: 40,
+                              color: Colors.grey,
+                            ),
+                            itemCount: _.boardModel.value.length,
+                          ),
+                        ));
+                  },
+                ),
+                // StreamBuilder<List<Category>>(
+                //     stream: fetchCategory(),
+                //     builder: (BuildContext context, AsyncSnapshot<List<Category>> snapshot){
+                //       if(snapshot.hasData){
+                //         return MultiSelectDialogField(
+                //           validator: (data) {
+                //             print("validator ${data}");
+                //           },
+                //           items: snapshot.data!.map((category1) => MultiSelectItem<Category?>(category1, category1.name))
+                //               .toList(),
+                //           title: Text("Category"),
+                //           initialValue: [],
+                //           selectedColor: Colors.orange,
+                //           chipDisplay: chip,
+                //           decoration: BoxDecoration(
+                //             // color: Colors.blue.withOpacity(0.1),
+                //             color: Color.fromARGB(255, 56, 59, 61),
+                //             borderRadius: BorderRadius.all(Radius.circular(8)),
+                //             border: Border.all(
+                //               width: 2,
+                //             ),
+                //           ),
+                //           buttonIcon: Icon(
+                //             Icons.add,
+                //             color: Colors.orange,
+                //           ),
+                //           buttonText: Text(
+                //             "Select Category",
+                //             style: TextStyle(
+                //               color: Colors.white60,
+                //               fontSize: 16,
+                //             ),
+                //           ),
+                //           onSelectionChanged: (test) {
+                //             print("change");
+                //             print(test);
+                //           },
+                //           onConfirm: (results) {
+                //             _selectedCategory = results.cast<Category?>();
+                //           },
+                //         );
+                //       }else
+                //         return Container(height: 100, width: 100, color: Colors.blue);
+                //     }
+                // ),
+              ],
+            ),
+          )),
+    );
+  }
+}
+
+*
+* */

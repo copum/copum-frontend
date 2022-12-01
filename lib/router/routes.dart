@@ -9,6 +9,7 @@ import 'package:copum/screen/login_screen.dart';
 import 'package:copum/screen/quill_542ver.dart';
 import 'package:copum/screen/register.dart';
 import 'package:copum/screen/home_screen.dart';
+import 'package:copum/screen/search_screen.dart';
 import 'package:copum/screen/start.dart';
 import 'package:copum/src/board_page.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,10 @@ class AppPages {
     GetPage(
         name: Routes.ANSWER,
         page: () => AnswerScreen(),
+        binding: BoardBinding()),
+    GetPage(
+        name: Routes.SEARCH,
+        page: () => SearchScreen(),
         binding: BoardBinding())
   ];
 }

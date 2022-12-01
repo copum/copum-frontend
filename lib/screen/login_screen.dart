@@ -152,6 +152,70 @@ class LoginScreen extends GetView<LoginController> {
               elevation: 0.0,
             ),
           ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          ElevatedButton.icon(
+            icon: const Padding(
+              padding: EdgeInsets.only(right: 80),
+              child: Icon(
+                Icons.apple,
+                size: 18.0,
+                color: Colors.black,
+              ),
+            ),
+            label: const Padding(
+                padding: EdgeInsets.only(right: 80),
+                child: /* GetX<LoginController>(initState: (state) {
+                Get.find<LoginController>().checkLogin();
+              }, builder: (_) {
+                return const Text('test');
+              }), */
+                    SizedBox.shrink()),
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              minimumSize: const Size(320, 48),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              elevation: 0.0,
+            ),
+          ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          ElevatedButton.icon(
+            icon: const Padding(
+              padding: EdgeInsets.only(right: 80),
+              child: Icon(
+                Icons.email,
+                size: 18.0,
+                color: Colors.black,
+              ),
+            ),
+            label: const Padding(
+              padding: EdgeInsets.only(right: 80),
+              child: Text(
+                "email로 시작하기",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: "Elice",
+                ),
+              ),
+            ),
+            onPressed: () {
+              Get.snackbar("hi", "테스트입니다");
+            },
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              minimumSize: const Size(320, 48),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              elevation: 0.0,
+            ),
+          ),
         ],
       ),
     );

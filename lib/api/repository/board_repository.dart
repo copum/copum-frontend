@@ -12,4 +12,8 @@ class BoardRepository {
   dynamic fetchBoard() {
     return apiClient.fetchData();
   }
+
+  dynamic searchBoard(String search){
+    return apiClient.search(search);
+  }
 }
