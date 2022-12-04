@@ -22,6 +22,8 @@ class Category {
   final String name;
 
   const Category({required this.id, required this.name});
+
+  static fromJson(json) {}
 }
 
 class _BoardScreen extends State<QuestionScreen> {

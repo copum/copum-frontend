@@ -13,12 +13,9 @@ class PostWidget extends GetView<BoardController> {
   int? id;
   String title;
   String content;
-  int answerCounting;
   int questionCounting;
 
-  PostWidget(
-      this.title, this.content, this.answerCounting, this.questionCounting,
-      {Key? key})
+  PostWidget(this.title, this.content, this.questionCounting, {Key? key})
       : super(key: key);
 
 // 프로필 사진
@@ -62,7 +59,7 @@ class PostWidget extends GetView<BoardController> {
         Get.toNamed('/answer', arguments: {
           'title': title,
           'content': content,
-          'answerCounting': answerCounting,
+          // 'answerCounting': answerCounting,
           'questionCounting': questionCounting
         });
       },
@@ -126,7 +123,7 @@ class PostWidget extends GetView<BoardController> {
             height: 16,
           ),
           Text(
-            '$questionCounting 번의 조회 * $answerCounting 개의 답변',
+            '$questionCounting 번의 조회 * answerCounting 개의 답변',
             style: const TextStyle(
               color: Colors.grey,
               fontSize: 12,

@@ -74,7 +74,7 @@ class BoardPage extends GetView<BoardController> {
                               child: PostWidget(
                                 _.boardModel.value[index].title,
                                 _.boardModel.value[index].content,
-                                _.boardModel.value[index].answerCounting,
+                                // _.boardModel.value[index].answerCounting,
                                 _.boardModel.value[index].questionCounting,
                               ),
                             );

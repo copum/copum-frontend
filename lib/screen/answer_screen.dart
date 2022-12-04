@@ -13,11 +13,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 // import 'package:get/get.dart';
 
-class AnswerScreen2 extends StatefulWidget {
-  const AnswerScreen2({Key? key}) : super(key: key);
+class AnswerScreen extends StatefulWidget {
+  const AnswerScreen({Key? key}) : super(key: key);
 
   @override
-  State<AnswerScreen2> createState() => _BoardScreen();
+  State<AnswerScreen> createState() => _BoardScreen();
 }
 
 class Category {
@@ -29,7 +29,7 @@ class Category {
   static fromJson(json) {}
 }
 
-class _BoardScreen extends State<AnswerScreen2> {
+class _BoardScreen extends State<AnswerScreen> {
   String title = '';
   MultipartFile? img;
   Future<void> onPress() async {

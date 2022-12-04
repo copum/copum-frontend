@@ -17,7 +17,7 @@ import 'package:get/get.dart';
 import '../binding/kakao_login_binding.dart';
 import 'package:copum/screen/question_screen.dart';
 
-import '../screen/answer_screen1.dart';
+import '../screen/answer_main.dart';
 
 abstract class Routes {
   static const INTRO = '/'; // 인트로 화면
@@ -51,6 +51,6 @@ class AppPages {
         name: Routes.ANSWER,
         page: () => AnswerMain(),
         binding: AnswerBinding()),
-    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen2()))
+    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen()))
   ];
 }
