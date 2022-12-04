@@ -34,7 +34,7 @@ class HomeScreen extends GetView<RootPageController> {
                 index: controller.rootPageIndex.value,
                 children: [
                   BoardPage(),
-                  Search(),
+                  SearchScreen(),
                   Profile(),
                   QuestionScreen(),
                 ],
