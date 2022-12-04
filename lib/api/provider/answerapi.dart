@@ -9,7 +9,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:copum/api/model/answermodel.dart';
 
-const answerUrl = 'http://10.0.2.2:8000/answer/'; //게시판
+// const answerUrl = 'http://10.0.2.2:8000/answer/'; //게시판 android
+const answerUrl = 'http://127.0.0.1:8000/answer/'; //게시판 ios
 // const boardUrl = 'http://localhost:8000/question/';
 
 class AnswerApiClient {

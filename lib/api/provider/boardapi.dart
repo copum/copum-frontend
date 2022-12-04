@@ -8,7 +8,8 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_quill/flutter_quill.dart';
 
-const boardUrl = 'http://10.0.2.2:8000/question/'; //게시판
+// const boardUrl = 'http://10.0.2.2:8000/question/'; //게시판 android
+const boardUrl = 'http://127.0.0.1:8000/question/'; //게시판 ios
 // const boardUrl = 'http://localhost:8000/question/';
 
 class BoardApiClient {
