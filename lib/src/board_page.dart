@@ -72,6 +72,7 @@ class BoardPage extends GetView<BoardController> {
                             // selection: TextSelection.collapsed(offset: 0));
                             return SingleChildScrollView(
                               child: PostWidget(
+                                _.boardModel.value[index].pk,
                                 _.boardModel.value[index].title,
                                 _.boardModel.value[index].content,
                                 // _.boardModel.value[index].answerCounting,

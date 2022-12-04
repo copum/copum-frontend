@@ -1,15 +1,16 @@
 import 'package:copum/screen/tmp.dart';
 
 class BoardModel {
-  late int? id;
+  late int? pk;
   late String title;
+  late String content;
   late String? category1;
   late String? category2;
   late String? category3;
   late String? category4;
-  late String content;
   late String? Author_id;
   late int questionCounting;
+  late int answerCounting;
   late String? image;
   // late int answerCounting;
 
@@ -26,13 +27,14 @@ class BoardModel {
     category4,
     content,
     questionCounting,
+    answerCounting,
     image,
     // answerCounting
   });
   // BoardModel({user_id, email});
 
   BoardModel.fromJson(Map<String, dynamic> json) {
-    id = json['pk'];
+    pk = json['pk'];
     title = json['Question_title'];
     category1 = json['Question_category1_id'];
     category2 = json['Question_category2_id'];
@@ -41,7 +43,7 @@ class BoardModel {
     content = json["Question_content"];
     questionCounting = json['Question_counting'];
     image = json['Question_image'];
-    // answerCounting = json['answers_count'];
+    answerCounting = json['answers_count'];
     Author_id = json['Author_id'];
 
     //   user_id = json['search_title'];
@@ -50,7 +52,7 @@ class BoardModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['pk'] = id;
+    data['pk'] = pk;
     data['Question_title'] = title;
     data['Question_category1_id'] = category1;
     data['Question_category2_id'] = category2;
@@ -59,7 +61,7 @@ class BoardModel {
     data['Question_content'] = content;
     data['Question_counting'] = questionCounting;
     data['Question_image'] = image;
-    // data['answers_count'] = answerCounting;
+    data['answers_count'] = answerCounting;
     data['Author_id'] = Author_id;
 
     // data['search_title'] = user_id;

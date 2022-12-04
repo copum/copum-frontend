@@ -70,10 +70,13 @@ class AnswerMain extends GetView<AnswerController> {
                         print(e);
                       }
                       // return Container();
-                      return TestWidget(
-                        _.answerModel.value[index].title,
-                        _.answerModel.value[index].content,
-                      );
+                      return Get.arguments['pk'] ==
+                              _.answerModel.value[index].question_id
+                          ? TestWidget(
+                              _.answerModel.value[index].title,
+                              _.answerModel.value[index].content,
+                            )
+                          : Container();
                     },
                     separatorBuilder: (context, index) => const Divider(
                       height: 10,

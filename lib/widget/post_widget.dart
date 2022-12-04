@@ -10,12 +10,13 @@ import 'package:get/get.dart';
 import '../controller/board_controller.dart';
 
 class PostWidget extends GetView<BoardController> {
-  int? id;
+  int? pk;
   String title;
   String content;
   int questionCounting;
 
-  PostWidget(this.title, this.content, this.questionCounting, {Key? key})
+  PostWidget(this.pk, this.title, this.content, this.questionCounting,
+      {Key? key})
       : super(key: key);
 
 // 프로필 사진
@@ -57,6 +58,7 @@ class PostWidget extends GetView<BoardController> {
     return GestureDetector(
       onTap: () {
         Get.toNamed('/answer', arguments: {
+          'pk': pk,
           'title': title,
           'content': content,
           // 'answerCounting': answerCounting,
