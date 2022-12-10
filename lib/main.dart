@@ -24,17 +24,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       // return GetMaterialApp(home: const Quill_542ver()
-
       getPages: AppPages.pages,
-      initialRoute: Routes.INTRO,
+      // initialRoute: Routes.INTRO,
       theme: ThemeData(primaryColor: Colors.grey),
       debugShowCheckedModeBanner: false,
       initialBinding: BindingsBuilder(() {
         Get.put(RootPageController());
       }),
       // home: const LoginScreen(),
-      // home: SearchScreen(),
-      // home:  BoardPage(),
+      home: SearchScreen(),
       // home: const Root(),
     );
   }

@@ -3,6 +3,7 @@ import 'package:copum/api/provider/boardapi.dart';
 import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/controller/board_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
+import 'package:copum/screen/search_screen.dart';
 import 'package:copum/screen/tmp.dart';
 import 'package:copum/src/question.dart';
 import 'package:flutter/material.dart';
