@@ -13,11 +13,9 @@ class PostWidget extends GetView<BoardController> {
   int? pk;
   String title;
   String content;
-  int answerCounting;
   int questionCounting;
 
-  PostWidget(
-      this.title, this.content, this.answerCounting, this.questionCounting,
+  PostWidget(this.pk, this.title, this.content, this.questionCounting,
       {Key? key})
       : super(key: key);
 
