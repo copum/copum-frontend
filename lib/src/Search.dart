@@ -1,15 +1,4 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter/src/foundation/key.dart';
-// import 'package:flutter/src/widgets/framework.dart';
-
-// class Search extends StatelessWidget {
-//   const Search({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column();
-//   }
-// }
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -22,7 +11,9 @@ import 'package:flutter_quill/flutter_quill.dart' hide Text;
 
 class SearchScreen extends GetView<BoardController> {
   QuillController _controller = QuillController.basic();
-  // String search = '';
+  TextEditingController textController = TextEditingController();
+
+  String searchText = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,89 +34,97 @@ class SearchScreen extends GetView<BoardController> {
         ),
         actions: [],
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          TextField(
-            onSubmitted: (data) {},
-            decoration: InputDecoration(
-                // suffixIcon: Icon(Icons.cancel),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    print("remove");
-                    // search = '';
-                  },
-                  icon: const Icon(Icons.cancel),
-                ),
-                hintText: '제목/내용',
-                hintStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
-                focusedBorder: OutlineInputBorder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            TextField(
+              controller: textController,
+              onSubmitted: (data) {
+                print("onSubmit");
+                Get.find<BoardController>().search(data);
+                searchText = data;
+              },
+              decoration: InputDecoration(
+                  // suffixIcon: Icon(Icons.cancel),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      // textController.clear();
+                      WidgetsBinding.instance
+                          .addPostFrameCallback((_) => textController.clear());
+                    },
+                    icon: const Icon(Icons.cancel),
+                  ),
+                  hintText: '제목/내용',
+                  hintStyle: TextStyle(color: Colors.grey),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
-                    borderSide: BorderSide(width: 0))),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          GetX<BoardController>(
-            initState: (state) {
-              Get.find<BoardController>().fetchBoard();
-            },
-            builder: (_) {
-              return _.boardModel.isEmpty
-                  ? CircularProgressIndicator()
-                  : SizedBox(
-                      height: 580,
-                      child: Obx(
-                        () => ListView.separated(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            try {
-                              dynamic A = _.boardModel[index].content;
-                              print('aaa2');
-                              var myJSON = jsonDecode(A);
-                              print('bbb: $myJSON');
-                              _controller = QuillController(
-                                  document: Document.fromJson(myJSON),
-                                  selection:
-                                      TextSelection.collapsed(offset: 0));
-                              var a = _controller.document.toPlainText();
-                              // print('values: $myJSON');
-                              // print('$a');
-                              _.boardModel.value[index].content = a;
-                              // return _.boardModel[index].content;
-                            } catch (e) {
-                              print(e);
-                            }
-                            // dynamic _controller = QuillController(
-                            // document: Document.fromJson(myJSON),``
-                            // selection: TextSelection.collapsed(offset: 0));
-                            return SingleChildScrollView(
-                              child: PostWidget(
-                                _.boardModel.value[index].title,
-                                _.boardModel.value[index].content,
-                                // _.boardModel.value[index].answerCounting,
-                                _.boardModel.value[index].questionCounting,
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) => const Divider(
-                            height: 40,
-                            color: Colors.grey,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderSide: BorderSide(width: 0))),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            GetX<BoardController>(
+              // initState: (state) {
+              //   Get.find<BoardController>().search();
+              // },
+              builder: (_) {
+                return _.boardModel.isEmpty
+                    ? CircularProgressIndicator()
+                    : SizedBox(
+                        height: 580,
+                        child: Obx(
+                          () => ListView.separated(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              try {
+                                dynamic A = _.boardModel[index].content;
+                                print('aaa2');
+                                var myJSON = jsonDecode(A);
+                                print('bbb: $myJSON');
+                                _controller = QuillController(
+                                    document: Document.fromJson(myJSON),
+                                    selection:
+                                        TextSelection.collapsed(offset: 0));
+                                var a = _controller.document.toPlainText();
+                                // print('values: $myJSON');
+                                // print('$a');
+                                _.boardModel.value[index].content = a;
+                                // return _.boardModel[index].content;
+                              } catch (e) {
+                                print(e);
+                              }
+                              // dynamic _controller = QuillController(
+                              // document: Document.fromJson(myJSON),``
+                              // selection: TextSelection.collapsed(offset: 0));
+                              return SingleChildScrollView(
+                                child: PostWidget(
+                                  _.boardModel.value[index].pk,
+                                  _.boardModel.value[index].title,
+                                  _.boardModel.value[index].content,
+                                  _.boardModel.value[index].questionCounting,
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) => const Divider(
+                              height: 40,
+                              color: Colors.grey,
+                            ),
+                            itemCount: _.boardModel.value.length,
                           ),
-                          itemCount: _.boardModel.value.length,
-                        ),
-                      ));
-            },
-          ),
-        ],
+                        ));
+              },
+            )
+          ],
+        ),
       ),
     );
   }
