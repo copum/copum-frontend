@@ -16,6 +16,10 @@ import 'question.dart';
 class BoardPage extends GetView<BoardController> {
   // late String content;
 
+  // BoardPage() {
+  //   Get.find<BoardController>().fetchBoard();
+  // }
+
   QuillController _controller = QuillController.basic();
 
   @override
