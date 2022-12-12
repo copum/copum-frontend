@@ -7,9 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_quill/flutter_quill.dart';
+import 'dart:io' show Platform;
 
-const boardUrl = 'http://10.0.2.2:8000/question/'; //게시판
+// const boardUrl = 'http://10.0.2.2:8000/question/'; //게시판
 // const boardUrl = 'http://localhost:8000/question/';
+String boardUrl = Platform.isAndroid
+    ? 'http://10.0.2.2:8000/question/'
+    : 'http://localhost:8000/question/';
 
 class BoardApiClient {
   final http.Client httpClient;
@@ -27,6 +31,19 @@ class BoardApiClient {
       //return ResponseModel(boardModel: boardModel);
     } catch (e) {
       //return ResponseModel(exception: e as Exception);
+      return null;
+    }
+  }
+
+  dynamic search(String search) async {
+    try {
+      String searchUrl = boardUrl + "?search=${search}";
+      http.Response response = await http.get(Uri.parse(searchUrl));
+      List<dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
+      var boardModel =
+          body.map((dynamic item) => BoardModel.fromJson(item)).toList();
+      return boardModel;
+    } catch (e) {
       return null;
     }
   }
