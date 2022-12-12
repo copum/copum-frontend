@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:copum/api/model/boardmodel.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:copum/controller/board_controller.dart';
@@ -13,7 +13,10 @@ class SearchScreen extends GetView<BoardController> {
   QuillController _controller = QuillController.basic();
   TextEditingController textController = TextEditingController();
 
-  String searchText = '';
+  void onInit() {
+    Get.find<BoardController>().clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +40,7 @@ class SearchScreen extends GetView<BoardController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             TextField(
@@ -45,7 +48,6 @@ class SearchScreen extends GetView<BoardController> {
               onSubmitted: (data) {
                 print("onSubmit");
                 Get.find<BoardController>().search(data);
-                searchText = data;
               },
               decoration: InputDecoration(
                   // suffixIcon: Icon(Icons.cancel),
@@ -61,23 +63,20 @@ class SearchScreen extends GetView<BoardController> {
                   hintStyle: TextStyle(color: Colors.grey),
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       borderSide: BorderSide(width: 0))),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             GetX<BoardController>(
-              // initState: (state) {
-              //   Get.find<BoardController>().search();
-              // },
               builder: (_) {
-                return _.boardModel.isEmpty
-                    ? CircularProgressIndicator()
+                return _.searchModel.isEmpty
+                    ? const SizedBox()
                     : SizedBox(
                         height: 580,
                         child: Obx(
@@ -86,7 +85,7 @@ class SearchScreen extends GetView<BoardController> {
                             scrollDirection: Axis.vertical,
                             itemBuilder: (context, index) {
                               try {
-                                dynamic A = _.boardModel[index].content;
+                                dynamic A = _.searchModel[index].content;
                                 print('aaa2');
                                 var myJSON = jsonDecode(A);
                                 print('bbb: $myJSON');
@@ -107,10 +106,10 @@ class SearchScreen extends GetView<BoardController> {
                               // selection: TextSelection.collapsed(offset: 0));
                               return SingleChildScrollView(
                                 child: PostWidget(
-                                  _.boardModel.value[index].pk,
-                                  _.boardModel.value[index].title,
-                                  _.boardModel.value[index].content,
-                                  _.boardModel.value[index].questionCounting,
+                                  _.searchModel.value[index].pk,
+                                  _.searchModel.value[index].title,
+                                  _.searchModel.value[index].content,
+                                  _.searchModel.value[index].questionCounting,
                                 ),
                               );
                             },
@@ -118,7 +117,7 @@ class SearchScreen extends GetView<BoardController> {
                               height: 40,
                               color: Colors.grey,
                             ),
-                            itemCount: _.boardModel.value.length,
+                            itemCount: _.searchModel.value.length,
                           ),
                         ));
               },
