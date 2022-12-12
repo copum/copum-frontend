@@ -10,11 +10,7 @@ class BoardController extends GetxController {
   BoardController({required this.repository});
 
   var boardModel = [].obs;
-
-  // repository.fetchBoard().then((data) {
-  //   print('boardList size: ${data?.length}');
-  //   boardList = data;
-  // });
+  var searchModel = [].obs;
 
   void fetchBoard() async {
     boardModel.value = await repository.fetchBoard(); //.value
@@ -22,6 +18,10 @@ class BoardController extends GetxController {
   }
 
   void search(String data) async {
-    boardModel.value = await repository.searchBoard(data); //.value
+    searchModel.value = await repository.searchBoard(data); //.value
+  }
+
+  void clear() {
+    searchModel.value = [];
   }
 }
