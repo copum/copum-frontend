@@ -29,7 +29,7 @@ class AnswerPage extends GetView {
     return Text(
       content,
       style: const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
@@ -99,7 +99,7 @@ class AnswerPage extends GetView {
                 ),
                 answerTitle('${Get.arguments['title']}'),
                 const SizedBox(
-                  height: 16,
+                  height: 24,
                 ),
                 answerContent('${Get.arguments['content']}'),
                 const SizedBox(
