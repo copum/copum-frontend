@@ -4,7 +4,6 @@ import 'package:copum/router/routes.dart';
 import 'package:copum/screen/answer_screen.dart';
 import 'package:copum/screen/question_screen.dart';
 import 'package:copum/screen/login_screen.dart';
-import 'package:copum/screen/quill_542ver.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:get/get.dart';
