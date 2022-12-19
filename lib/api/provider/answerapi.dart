@@ -8,10 +8,15 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:copum/api/model/answermodel.dart';
+import 'dart:io' show Platform;
 
 // const answerUrl = 'http://10.0.2.2:8000/answer/'; //게시판 android
-const answerUrl = 'http://127.0.0.1:8000/answer/'; //게시판 ios
+// const answerUrl = 'http://127.0.0.1:8000/answer/'; //게시판 ios
 // const boardUrl = 'http://localhost:8000/question/';
+
+String answerUrl = Platform.isAndroid
+    ? 'http://10.0.2.2:8000/question/'
+    : 'http://127.0.0.1:8000/question/';
 
 class AnswerApiClient {
   final http.Client httpClient;

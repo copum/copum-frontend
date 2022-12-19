@@ -13,7 +13,7 @@ import 'dart:io' show Platform;
 // const boardUrl = 'http://localhost:8000/question/';
 String boardUrl = Platform.isAndroid
     ? 'http://10.0.2.2:8000/question/'
-    : 'http://localhost:8000/question/';
+    : 'http://127.0.0.1:8000/question/';
 
 class BoardApiClient {
   final http.Client httpClient;

@@ -13,11 +13,16 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:meta/meta.dart';
 import 'package:copum/main.dart';
+import 'dart:io' show Platform;
 
 //애뮬레이터에서 돌릴때 10.0.2.2 아닐땐 실제 url 사용
 // const baseUrl = 'http://10.0.2.2:8000/account/kakao/login'; //카카오 android
-const baseUrl = 'http://127.0.0.1:8000/account/kakao/login'; //카카오 ios
+// const baseUrl = 'http://127.0.0.1:8000/account/kakao/login'; //카카오 ios
 // const baseUrl = 'http://localhost:8000/account/kakao/login';
+
+String baseUrl = Platform.isAndroid
+    ? 'http://10.0.2.2:8000/question/'
+    : 'http://127.0.0.1:8000/question/';
 
 class CopumApiClient {
   final http.Client httpClient;
