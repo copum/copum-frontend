@@ -1,5 +1,3 @@
-import 'package:copum/screen/tmp.dart';
-
 class AnswerModel {
   late int? question_id;
   late String title;

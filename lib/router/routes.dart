@@ -8,7 +8,6 @@ import 'package:copum/screen/answer_screen.dart';
 
 import 'package:copum/screen/login_screen.dart';
 import 'package:copum/screen/quill_542ver.dart';
-import 'package:copum/screen/register.dart';
 import 'package:copum/screen/home_screen.dart';
 import 'package:copum/screen/start.dart';
 import 'package:copum/src/board_page.dart';

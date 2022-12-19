@@ -1,5 +1,3 @@
-import 'package:copum/screen/tmp.dart';
-
 class BoardModel {
   late int? pk;
   late String title;
