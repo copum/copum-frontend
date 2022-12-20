@@ -21,8 +21,8 @@ import 'dart:io' show Platform;
 // const baseUrl = 'http://localhost:8000/account/kakao/login';
 
 String baseUrl = Platform.isAndroid
-    ? 'http://10.0.2.2:8000/question/'
-    : 'http://127.0.0.1:8000/question/';
+    ? 'http://10.0.2.2:8000/account/kakao/login'
+    : 'http://127.0.0.1:8000/account/kakao/login';
 
 class CopumApiClient {
   final http.Client httpClient;
@@ -31,13 +31,10 @@ class CopumApiClient {
   kakaoLogin(String token) async {
     try {
       final url = Uri.parse('$baseUrl?access_token=$token');
-      print('$url');
 
       var response = await httpClient.get(url);
-      print('$response');
       if (response.statusCode == 200) {
         final result = jsonDecode(utf8.decode(response.bodyBytes));
-        print('$result');
         return result;
       } else
         print('error');

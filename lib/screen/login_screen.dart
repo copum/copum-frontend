@@ -1,3 +1,4 @@
+import 'package:copum/controller/user_controller.dart';
 import 'package:copum/screen/home_screen.dart';
 import 'package:path/path.dart' as Path;
 import 'package:copum/api/google_signin_api.dart';
@@ -108,8 +109,11 @@ class LoginScreen extends GetView<LoginController> {
                 ),
               ),
             ),
-            onPressed: () {
-              Get.find<LoginController>().checkLogin();
+            onPressed: () async {
+              var user = await Get.find<LoginController>().checkLogin();
+              Get.find<UserController>().user = user;
+              print(Get.find<UserController>().user);
+              print("test");
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.yellow,
