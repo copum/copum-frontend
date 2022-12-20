@@ -1,6 +1,7 @@
 import 'package:copum/api/model/boardmodel.dart';
 import 'package:copum/binding/answer_binding.dart';
 import 'package:copum/binding/board_binding.dart';
+import 'package:copum/binding/profile_binding.dart';
 import 'package:copum/binding/root_page_binding.dart';
 import 'package:copum/controller/root_page_controller.dart';
 import 'package:copum/screen/agreement.dart';
@@ -8,6 +9,7 @@ import 'package:copum/screen/answer_screen.dart';
 
 import 'package:copum/screen/login_screen.dart';
 import 'package:copum/screen/home_screen.dart';
+import 'package:copum/screen/profile.dart';
 import 'package:copum/screen/start.dart';
 import 'package:copum/src/board_page.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +51,10 @@ class AppPages {
         name: Routes.ANSWER,
         page: () => AnswerMain(),
         binding: AnswerBinding()),
-    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen()))
+    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen())),
+    GetPage(
+        name: Routes.PROFILE,
+        page: () => ProfileScreen(),
+        binding: ProfileBinding())
   ];
 }
