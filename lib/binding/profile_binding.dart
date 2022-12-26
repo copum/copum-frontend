@@ -9,8 +9,9 @@ class ProfileBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<UserController>(() {
       return UserController(
-          repository: UserRepository(
-              userApi: UserApiClient(httpClient: http.Client())));
+          // repository: UserRepository(
+          //     userApi: UserApiClient(httpClient: http.Client()))
+          );
     });
   }
 }

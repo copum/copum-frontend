@@ -73,7 +73,10 @@ class HomeScreen extends GetView<RootPageController> {
             fontSize: 12,
             //color: Colors.greenAccent
           ),
-          onTap: controller.changeRootPageIndex,
+          onTap: (idx) {
+            print(idx);
+            controller.changeRootPageIndex(idx);
+          },
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home, color: Colors.grey),

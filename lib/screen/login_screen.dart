@@ -113,7 +113,7 @@ class LoginScreen extends GetView<LoginController> {
               var user = await Get.find<LoginController>().checkLogin();
               Get.find<UserController>().user = user;
               if (Get.find<UserController>().user != null) {
-                Get.off(() => HomeScreen());
+                Get.toNamed('home');
               }
             },
             style: ElevatedButton.styleFrom(

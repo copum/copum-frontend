@@ -4,8 +4,8 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
-  final UserRepository repository;
-  UserController({required this.repository});
+  // final UserRepository repository;
+  // UserController({required this.repository});
   var _user = UserModel().obs;
 
   get user => this._user.value;

@@ -6,7 +6,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-class ProfileScreen extends GetView<UserController> {
+class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +45,7 @@ class ProfileScreen extends GetView<UserController> {
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(300),
                             child: Image.network(
-                                "https://via.placeholder.com/150")),
+                                'https://picsum.photos/150?image=9')),
                       ))),
               SizedBox(
                 height: 50,

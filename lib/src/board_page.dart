@@ -55,10 +55,7 @@ class BoardPage extends GetView<BoardController> {
                           itemBuilder: (context, index) {
                             try {
                               dynamic A = _.boardModel[index].content;
-                              print(_.boardModel.indexOf(A));
-                              print('aaa2');
                               var myJSON = jsonDecode(A);
-                              print('bbb: $myJSON');
                               _controller = QuillController(
                                   document: Document.fromJson(myJSON),
                                   selection:

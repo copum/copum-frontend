@@ -17,8 +17,10 @@ class HomeBinding implements Bindings {
     });
     Get.lazyPut<UserController>(() {
       return UserController(
-          repository: UserRepository(
-              userApi: UserApiClient(httpClient: http.Client())));
+// repository: UserRepository(
+//               userApi: UserApiClient(httpClient: http.Client()))
+
+          );
     });
   }
 }
