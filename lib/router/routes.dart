@@ -11,6 +11,7 @@ import 'package:copum/screen/login_screen.dart';
 import 'package:copum/screen/home_screen.dart';
 import 'package:copum/screen/profile.dart';
 import 'package:copum/screen/start.dart';
+import 'package:copum/src/answer_page.dart';
 import 'package:copum/src/board_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,12 +32,14 @@ abstract class Routes {
   static const BOARD = '/board';
   static const ANSWER = '/answer';
   static const ANSWER2 = '/answer2';
+  static const ANSWER_PAGE = '/answer_page';
+  static const NEW_QUESTION = '/new_question';
 }
 
 class AppPages {
   static final pages = [
     GetPage(
-        name: Routes.BOARD,
+        name: Routes.QUESTION,
         page: () => const QuestionScreen(),
         // page: () => const Quill_542ver(),
         binding: BoardBinding()),
@@ -51,10 +54,6 @@ class AppPages {
         name: Routes.ANSWER,
         page: () => AnswerMain(),
         binding: AnswerBinding()),
-    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen())),
-    GetPage(
-        name: Routes.PROFILE,
-        page: () => ProfileScreen(),
-        binding: ProfileBinding())
+    GetPage(name: Routes.ANSWER2, page: (() => AnswerScreen()))
   ];
 }
