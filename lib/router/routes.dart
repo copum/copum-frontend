@@ -10,6 +10,7 @@ import 'package:copum/screen/answer_screen.dart';
 import 'package:copum/screen/login_screen.dart';
 import 'package:copum/screen/home_screen.dart';
 import 'package:copum/screen/profile.dart';
+// import 'package:copum/screen/profile.dart';
 import 'package:copum/screen/start.dart';
 import 'package:copum/src/board_page.dart';
 import 'package:flutter/material.dart';

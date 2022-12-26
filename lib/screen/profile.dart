@@ -1,7 +1,12 @@
+import 'package:copum/api/provider/user_api.dart';
+import 'package:copum/api/repository/user_repository.dart';
+import 'package:copum/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +50,9 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 50,
               ),
-              CustonRow(dataTitle("사용자 이름"), dataContent("내용내용")),
+              CustonRow(dataTitle("사용자 이름"),
+                  dataContent("${Get.find<UserController>().user.userId}")),
+              CustonRow(dataTitle("사용자 이름"), dataContent("test")),
               CustonRow(dataTitle("레벨"), dataContent("기초")),
               CustonRow(dataTitle("관심기술"), dataContent("이것저것")),
               CustonRow(dataTitle("소개"), dataContent("이것저것")),

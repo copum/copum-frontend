@@ -4,7 +4,7 @@ class UserModel {
   late String email;
   late String? profileImage;
   late String loginType;
-  UserModel({id, user_id, email, profile_image, login_type});
+  UserModel({id, userId, email, profileImage, loginType});
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

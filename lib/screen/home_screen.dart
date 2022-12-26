@@ -3,6 +3,8 @@ import 'package:copum/api/provider/boardapi.dart';
 import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/controller/board_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
+import 'package:copum/router/routes.dart';
+import 'package:copum/screen/profile.dart';
 import 'package:copum/src/question.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -34,7 +36,7 @@ class HomeScreen extends GetView<RootPageController> {
                 children: [
                   BoardPage(),
                   SearchScreen(),
-                  Profile(),
+                  ProfileScreen(),
                   QuestionScreen(),
                 ],
               ),

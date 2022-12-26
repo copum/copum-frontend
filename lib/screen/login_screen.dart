@@ -112,8 +112,9 @@ class LoginScreen extends GetView<LoginController> {
             onPressed: () async {
               var user = await Get.find<LoginController>().checkLogin();
               Get.find<UserController>().user = user;
-              print(Get.find<UserController>().user);
-              print("test");
+              if (Get.find<UserController>().user != null) {
+                Get.off(() => HomeScreen());
+              }
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.yellow,
