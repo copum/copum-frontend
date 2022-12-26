@@ -29,7 +29,7 @@ class AnswerPage extends GetView {
     return Text(
       content,
       style: const TextStyle(
-        fontSize: 14,
+        fontSize: 16,
         color: Colors.white,
         fontWeight: FontWeight.bold,
       ),
@@ -99,7 +99,7 @@ class AnswerPage extends GetView {
                 ),
                 answerTitle('${Get.arguments['title']}'),
                 const SizedBox(
-                  height: 16,
+                  height: 24,
                 ),
                 answerContent('${Get.arguments['content']}'),
                 const SizedBox(
@@ -113,6 +113,31 @@ class AnswerPage extends GetView {
                   width: 250,
                 ),
               ],
+            ),
+            Container(
+              alignment: Alignment.bottomRight,
+              margin: const EdgeInsets.only(left: 200),
+              child: Row(
+                // crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Get.toNamed('/answer2');
+                      },
+                      style: ElevatedButton.styleFrom(primary: Colors.black87),
+                      child: const Icon(
+                        Icons.question_answer_outlined,
+                        color: Colors.white,
+                      )),
+                  ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(primary: Colors.black87),
+                      child: const Icon(
+                        Icons.check_box_rounded,
+                        color: Colors.white,
+                      )),
+                ],
+              ),
             ),
           ],
         ),

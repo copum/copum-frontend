@@ -6,6 +6,7 @@ import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/controller/answer_controller.dart';
 import 'package:copum/controller/board_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
+
 import 'package:copum/src/question.dart';
 import 'package:copum/widget/post_widget.dart';
 // import 'package:copum/widget/test.dart';
@@ -18,6 +19,7 @@ import 'package:get/get.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 
 import '../widget/answer_widget.dart';
+import '../widget/aaa.dart';
 // import '../widget/answer_widget.dart';
 
 class AnswerMain extends GetView<AnswerController> {
@@ -54,27 +56,27 @@ class AnswerMain extends GetView<AnswerController> {
                   height: 500,
                   child: ListView.separated(
                     shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
+                    // scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
                       try {
                         dynamic answer = _.answerModel[index].content;
                         var myJson = jsonDecode(answer);
                         _controller = QuillController(
                             document: Document.fromJson(myJson),
-                            selection: TextSelection.collapsed(offset: 0));
+                            selection:
+                                const TextSelection.collapsed(offset: 0));
                         var result = _controller.document.toPlainText();
                         _.answerModel.value[index].content = result;
                       } catch (e) {
                         print(e);
                       }
-                      // return Container();
+
                       return Get.arguments['pk'] ==
                               _.answerModel.value[index].question_id
-                          ? Container()
-                          // TestWidget(
-                          //     _.answerModel.value[index].title,
-                          //     _.answerModel.value[index].content,
-                          //   )
+                          ? TestWidget(
+                              _.answerModel.value[index].title,
+                              _.answerModel.value[index].content,
+                            )
                           : Container();
                     },
                     separatorBuilder: (context, index) => const Divider(

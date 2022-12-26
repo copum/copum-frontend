@@ -5,13 +5,11 @@ import 'package:copum/controller/board_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
 import 'package:copum/router/routes.dart';
 import 'package:copum/screen/profile.dart';
-import 'package:copum/src/question.dart';
+import 'package:copum/screen/question_screen.dart';
+import 'package:copum/src/Search.dart';
+import 'package:copum/src/board_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import '../src/Search.dart';
-import '../src/board_page.dart';
-import '../src/profile.dart';
-import 'package:get/get.dart';
 
 //게시판 첫화면(메인화면 ?)
 class HomeScreen extends GetView<RootPageController> {
