@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:copum/api/model/boardmodel.dart';
 import 'package:copum/api/model/kakao_login_model.dart';
+import 'package:copum/api/model/user_model.dart';
 import 'package:copum/api/repository/kakao_login_repository.dart';
 import 'package:copum/router/routes.dart';
 import 'package:copum/screen/login_screen.dart';
@@ -15,6 +16,8 @@ import 'package:meta/meta.dart';
 import 'package:copum/main.dart';
 import 'dart:io' show Platform;
 
+import 'package:path/path.dart';
+
 //애뮬레이터에서 돌릴때 10.0.2.2 아닐땐 실제 url 사용
 // const baseUrl = 'http://10.0.2.2:8000/account/kakao/login'; //카카오 android
 // const baseUrl = 'http://127.0.0.1:8000/account/kakao/login'; //카카오 ios
@@ -27,14 +30,18 @@ String baseUrl = Platform.isAndroid
 class CopumApiClient {
   final http.Client httpClient;
   CopumApiClient({required this.httpClient});
+  var userModel;
 
   kakaoLogin(String token) async {
     try {
       final url = Uri.parse('$baseUrl?access_token=$token');
 
-      var response = await httpClient.get(url);
+      http.Response response = await httpClient.get(url);
+      var test = jsonDecode(utf8.decode(response.bodyBytes));
+      var test1 = test["user"];
+      var _userModel = UserModel.fromJson(test1);
       if (response.statusCode == 200) {
-        final result = jsonDecode(utf8.decode(response.bodyBytes));
+        var result = jsonDecode(utf8.decode(response.bodyBytes));
         return result;
       } else
         print('error');
