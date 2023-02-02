@@ -11,11 +11,9 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk_user.dart';
 class LoginController extends GetxController {
   final KakaoLoginRepository repository;
   LoginController({required this.repository});
-  var userModel = [].obs;
 
-  fetchUserData() {
-    return userModel;
-  }
+  var _userModel = UserModel().obs;
+  UserModel get userModel => _userModel.value;
 
   void checkLogin() async {
     if (await isKakaoTalkInstalled()) {
@@ -53,8 +51,8 @@ class LoginController extends GetxController {
 
   void kakaologinControl(String accessToken) async {
     final response = await repository.kakaoLogin(accessToken);
-    var test = response["user"];
-    var userModel = UserModel.fromJson(test);
+    var user_response = response["user"];
+    _userModel.value = UserModel.fromJson(user_response);
     if (response['error']) {
       // Get.toNamed('/agreement');
       //error ==> ??? Toast?
@@ -62,7 +60,6 @@ class LoginController extends GetxController {
     } else {
       if (response['status'] == 200) {
         // 메인화면 이동
-        fetchUserData();
         Get.toNamed('/home');
       } else {
         // error : false , status 200 이 아닌경우 ,,
