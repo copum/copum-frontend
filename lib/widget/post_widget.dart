@@ -7,9 +7,11 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:get/get.dart';
 
+import '../api/model/user_model.dart';
 import '../controller/board_controller.dart';
+import '../controller/kakao_login_controller.dart';
 
-class PostWidget extends GetView<BoardController> {
+class PostWidget extends GetView {
   int? pk;
   String title;
   String content;
@@ -18,7 +20,6 @@ class PostWidget extends GetView<BoardController> {
   PostWidget(this.pk, this.title, this.content, this.questionCounting,
       {Key? key})
       : super(key: key);
-
 // 프로필 사진
   Widget profileImage() {
     return GestureDetector(
@@ -34,11 +35,11 @@ class PostWidget extends GetView<BoardController> {
   }
 
 // 프로필이름 , 시간
-  Widget body() {
+  Widget body(String profile) {
     return Column(
       children: [
         Text(
-          title,
+          profile,
           style: const TextStyle(fontSize: 12, color: Colors.white),
         ),
         const SizedBox(
@@ -77,6 +78,7 @@ class PostWidget extends GetView<BoardController> {
 
   @override
   Widget build(BuildContext context) {
+    var userModel = Get.find<LoginController>().userModel;
     return Container(
       margin: const EdgeInsets.only(left: 26, right: 26),
       child: Column(
@@ -91,7 +93,7 @@ class PostWidget extends GetView<BoardController> {
               const SizedBox(
                 width: 10,
               ),
-              body(),
+              body(userModel.profile),
               // const SizedBox(
               //   height: 20,
               // ),

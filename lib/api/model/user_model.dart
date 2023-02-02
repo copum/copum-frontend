@@ -1,31 +1,21 @@
 class UserModel {
-  late int id;
-  late String userId;
   late String email;
-  late String? profileImage;
-  late String loginType;
-  UserModel({id, userId, email, profileImage, loginType});
+  late String profile;
+  late String? profile_image;
+  UserModel({email, profile, profile_image});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
     email = json['email'];
-    profileImage = json["profile_image"] ?? null;
-    loginType = json["login_type"];
+    profile = json['profile'];
+    profile_image = json["profile_image"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['userId'] = userId;
     data['email'] = email;
-    data['profileImage'] = profileImage;
-    data['loginType'] = loginType;
-    return data;
-  }
+    data['profile'] = profile;
+    data['profile_image'] = profile_image;
 
-  @override
-  String toString() {
-    return '{id: ${id}, userId: ${userId}, email: ${email}, profileImage: ${profileImage}, loginType ${loginType}}';
+    return data;
   }
 }
