@@ -34,7 +34,6 @@ class AnswerModel {
     data['Answer_content'] = content;
     data['Answer_created_at'] = answer_created_at;
     data['Answer_image'] = image;
-
     return data;
   }
 }

@@ -4,6 +4,7 @@ import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/controller/board_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
 import 'package:copum/router/routes.dart';
+import 'package:copum/screen/category_select_screen.dart';
 import 'package:copum/screen/profile.dart';
 import 'package:copum/screen/question_screen.dart';
 import 'package:copum/src/Search.dart';
@@ -36,6 +37,7 @@ class HomeScreen extends GetView<RootPageController> {
                   SearchScreen(),
                   ProfileScreen(),
                   QuestionScreen(),
+                  CategorySelectScreen(),
                 ],
               ),
             ),
@@ -97,6 +99,14 @@ class HomeScreen extends GetView<RootPageController> {
               label: '프로필',
               activeIcon: Icon(
                 Icons.person,
+                color: Colors.greenAccent,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.question_answer, color: Colors.grey),
+              label: '질문하기',
+              activeIcon: Icon(
+                Icons.question_answer,
                 color: Colors.greenAccent,
               ),
             ),

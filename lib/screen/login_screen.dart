@@ -110,7 +110,8 @@ class LoginScreen extends GetView<LoginController> {
               ),
             ),
             onPressed: () {
-              Get.find<LoginController>().checkLogin();
+              // Get.find<LoginController>().checkLogin();
+              Get.toNamed("/home");
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.yellow,
