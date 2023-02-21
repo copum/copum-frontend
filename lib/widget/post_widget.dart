@@ -37,6 +37,7 @@ class PostWidget extends GetView {
 // 프로필이름 , 시간
   Widget body(String profile) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           profile,
@@ -76,15 +77,26 @@ class PostWidget extends GetView {
     );
   }
 
+  // late int _boardPk;
+  // int get boardpk => _boardPk;
+
+  // boardPk() {
+  //   var b = Get.find<BoardController>().dataTest;
+  //   int _boardPk = b.pk;
+  //   return _boardPk;
+  // }
+
   @override
   Widget build(BuildContext context) {
     var userModel = Get.find<LoginController>().userModel;
+    var test = Get.find<BoardController>().dataTest;
     return Container(
       margin: const EdgeInsets.only(left: 26, right: 26),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // const SizedBox(
               //   width: 20,
