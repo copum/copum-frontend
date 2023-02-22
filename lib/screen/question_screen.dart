@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:copum/controller/board_controller.dart';
+import 'package:copum/controller/question_controller%20copy.dart';
+import 'package:copum/src/profile.dart';
+import 'package:copum/widget/answer_widget.dart';
 import 'package:dio/dio.dart';
 // import 'package:get/get.dart';
 import 'package:http_parser/http_parser.dart';
@@ -9,13 +13,9 @@ import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart'; // category
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:get/get.dart' hide MultipartFile, FormData;
 
-class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({Key? key}) : super(key: key);
-
-  @override
-  State<QuestionScreen> createState() => _BoardScreen();
-}
+import '../controller/kakao_login_controller.dart';
 
 class Category {
   final int id;
@@ -26,54 +26,32 @@ class Category {
   static fromJson(json) {}
 }
 
-class _BoardScreen extends State<QuestionScreen> {
+class QuestionScreen extends GetView<BoardController> {
   String title = '';
   MultipartFile? img;
+  late int author_id;
+
   Future<void> onPress() async {
-    var url = "http://localhost:8000/question/";
-    String str = _controller.document.toDelta().toJson().toString();
+    var str = jsonEncode(_controller.document.toDelta().toJson());
     var dio = Dio();
 
-    dio.options.contentType = 'multipart/form-data';
-    var formData = new FormData.fromMap({
-      'Question_category1': _selectedCategory[0]!.id,
-      'Question_category2':
-          _selectedCategory.length >= 2 ? _selectedCategory[1]!.id : null,
-      'Question_category3':
-          _selectedCategory.length >= 3 ? _selectedCategory[2]!.id : null,
-      'Question_category4':
-          _selectedCategory.length >= 4 ? _selectedCategory[3]!.id : null,
-      'Question_title': title,
-      'Question_image': img ?? null,
-      'Question_content': str,
-    });
-    try {
-      var response = await dio.post(url, data: formData);
-      print(response.data.toString());
-      print("success");
-    } catch (e) {
-      print(e.toString());
-      print("error");
-    }
+    var controller = Get.find<BoardController>();
+    controller.insert(
+        title,
+        str,
+        author_id,
+        _selectedCategory[0]!.id,
+        _selectedCategory.length >= 2 ? _selectedCategory[1]!.id : null,
+        _selectedCategory.length >= 3 ? _selectedCategory[2]!.id : null,
+        _selectedCategory.length >= 4 ? _selectedCategory[3]!.id : null);
+    _controller.clear();
+    Get.toNamed('home');
   }
 
-  FocusNode? editorFocus;
+  FocusNode editorFocus = FocusNode();
   bool editorFocused = false;
 
-  void initState() {
-    super.initState();
-    editorFocus = FocusNode();
-    _editorFocusListener();
-  }
-
-  _editorFocusListener() {
-    editorFocus!.addListener(() {
-      setState(() {
-        editorFocused = editorFocus!.hasFocus ? true : false;
-      });
-    });
-  }
-
+  @override
   QuillController _controller = QuillController.basic();
   static final List<Category> _categories = [
     const Category(id: 1, name: 'Dart'),
@@ -109,9 +87,15 @@ class _BoardScreen extends State<QuestionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var userModel = Get.find<LoginController>().userModel;
+    author_id = userModel.user_id;
+
+    // Get.put(QuestionTestController());
+    // Get.find<QuestionTestController>().onInit();
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('질문하기'),
         backgroundColor: Colors.black,
         centerTitle: true,
@@ -126,7 +110,7 @@ class _BoardScreen extends State<QuestionScreen> {
             tooltip: 'send',
             onPressed: () {
               onPress();
-              setState(() {});
+              // setState(() {});
             },
           )
         ],
@@ -136,7 +120,16 @@ class _BoardScreen extends State<QuestionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              Row(
+                children: [
+                  // AnswerWidget(
+                  //   pk: 3,
+                  // ).profileImage(),
+                  // Text("Get.arguments[title]"),
+                ],
+              ),
+              Text("Get.arguments[title]"),
+              const SizedBox(
                 height: 15,
               ),
               // 제목 + text fielㅇ
@@ -145,23 +138,23 @@ class _BoardScreen extends State<QuestionScreen> {
                   print("validator ${data}");
                 },
                 items: _items,
-                title: Text("Category"),
+                title: const Text("Category"),
                 initialValue: [],
                 selectedColor: Colors.orange,
                 chipDisplay: chip,
                 decoration: BoxDecoration(
                   // color: Colors.blue.withOpacity(0.1),
-                  color: Color.fromARGB(255, 56, 59, 61),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: const Color.fromARGB(255, 56, 59, 61),
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
                   border: Border.all(
                     width: 2,
                   ),
                 ),
-                buttonIcon: Icon(
+                buttonIcon: const Icon(
                   Icons.add,
                   color: Colors.orange,
                 ),
-                buttonText: Text(
+                buttonText: const Text(
                   "Select Category",
                   style: TextStyle(
                     color: Colors.white60,
@@ -185,16 +178,16 @@ class _BoardScreen extends State<QuestionScreen> {
                   // print(_selectedCategory);
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
 
               ///제목
 
               const Text("제목",
-                  style: const TextStyle(
+                  style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextField(
@@ -214,23 +207,23 @@ class _BoardScreen extends State<QuestionScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                         borderSide: BorderSide(width: 0))),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
               Center(
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                         color: Color.fromARGB(255, 56, 59, 61),
                       ),
-                      constraints: BoxConstraints(
+                      constraints: const BoxConstraints(
                           minHeight: 100,
                           minWidth: double.infinity,
                           maxHeight: 500),
@@ -241,10 +234,10 @@ class _BoardScreen extends State<QuestionScreen> {
                         scrollController: ScrollController(),
                         expands: true,
                         scrollable: true,
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: const EdgeInsets.only(left: 10, right: 10),
                         focusNode: editorFocus!,
                         embedBuilders: FlutterQuillEmbeds.builders(),
-                        locale: Locale('ko'),
+                        locale: const Locale('ko'),
                       ),
                     ),
                   ],
@@ -268,7 +261,7 @@ class _BoardScreen extends State<QuestionScreen> {
                     locale: Locale('ko'),
                   ),
                 ))
-            : SizedBox(height: 0)
+            : const SizedBox(height: 0)
       ]),
     );
   }

@@ -13,6 +13,12 @@ class BoardRepository {
     return apiClient.fetchData();
   }
 
+  dynamic insertBoard(
+      title, content, Author_id, category1, category2, category3, category4) {
+    return apiClient.insert(
+        title, content, Author_id, category1, category2, category3, category4);
+  }
+
   dynamic searchBoard(String search) {
     return apiClient.search(search);
   }

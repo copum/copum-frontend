@@ -1,12 +1,12 @@
 class BoardModel {
-  late int? pk;
+  late int pk;
   late String title;
   late String content;
-  late String? category1;
-  late String? category2;
-  late String? category3;
-  late String? category4;
-  late String? Author_id;
+  int? category1;
+  int? category2;
+  int? category3;
+  int? category4;
+  int? Author_id;
   late int questionCounting;
   late int answerCounting;
   late String? image;
@@ -18,6 +18,7 @@ class BoardModel {
   // late String email;
 
   BoardModel({
+    pk,
     title,
     category1,
     category2,
@@ -27,6 +28,7 @@ class BoardModel {
     questionCounting,
     answerCounting,
     image,
+    Author_id,
     // answerCounting
   });
   // BoardModel({user_id, email});
@@ -34,32 +36,28 @@ class BoardModel {
   BoardModel.fromJson(Map<String, dynamic> json) {
     pk = json['pk'];
     title = json['Question_title'];
-    category1 = json['Question_category1_id'];
-    category2 = json['Question_category2_id'];
-    category3 = json['Question_category3_id'];
-    category4 = json['Question_category4_id'];
+    category1 = json['Question_category1'];
+    category2 = json['Question_category2'];
+    category3 = json['Question_category3'];
+    category4 = json['Question_category4'];
     content = json["Question_content"];
     questionCounting = json['Question_counting'];
     image = json['Question_image'];
     answerCounting = json['answers_count'];
     Author_id = json['Author_id'];
-
-    //   user_id = json['search_title'];
-    //   email = json['email'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['pk'] = pk;
     data['Question_title'] = title;
-    data['Question_category1_id'] = category1;
-    data['Question_category2_id'] = category2;
-    data['Question_category3_id'] = category3;
-    data['Question_category4_id'] = category4;
+    data['Question_category1'] = category1;
+    data['Question_category2'] = category2;
+    data['Question_category3'] = category3;
+    data['Question_category4'] = category4;
     data['Question_content'] = content;
-    data['Question_counting'] = questionCounting;
+    // data['Question_counting'] = questionCounting;
     data['Question_image'] = image;
-    data['answers_count'] = answerCounting;
+    // data['answers_count'] = answerCounting;
     data['Author_id'] = Author_id;
 
     // data['search_title'] = user_id;
