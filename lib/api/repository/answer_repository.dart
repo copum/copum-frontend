@@ -13,4 +13,8 @@ class AnswerRepository {
   dynamic fetchBoard() {
     return apiClient.answerFetchData();
   }
+
+  dynamic insertBoard(title, content, author, image, question) {
+    return apiClient.insert(title, content, author, image, question);
+  }
 }

@@ -91,11 +91,17 @@ class AnswerPage extends GetView {
                 ),
 
                 const SizedBox(
-                  height: 30,
-                  child: Divider(
-                    height: 2,
-                    color: Colors.blueGrey,
+                  height: 26,
+                ),
+                const Text(
+                  '<category>',
+                  style: TextStyle(
+                    color: Colors.yellow,
+                    fontSize: 12,
                   ),
+                ),
+                const SizedBox(
+                  height: 18,
                 ),
                 answerTitle('${Get.arguments['title']}'),
                 const SizedBox(
@@ -107,35 +113,52 @@ class AnswerPage extends GetView {
                 ),
                 // 답변 이미지
                 Container(
-                  alignment: Alignment.center,
+                  // margin: EdgeInsets.only(right: 10),
                   color: Colors.white,
                   height: 140,
-                  width: 250,
+                  width: 320,
                 ),
               ],
+            ),
+            const SizedBox(
+              height: 24,
             ),
             Container(
               alignment: Alignment.bottomRight,
               margin: const EdgeInsets.only(left: 200),
               child: Row(
-                // crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Get.toNamed('/answer2');
-                      },
-                      style: ElevatedButton.styleFrom(primary: Colors.black87),
-                      child: const Icon(
-                        Icons.question_answer_outlined,
-                        color: Colors.white,
-                      )),
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(primary: Colors.black87),
-                      child: const Icon(
-                        Icons.check_box_rounded,
-                        color: Colors.white,
-                      )),
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed('/answer2');
+                        },
+                        style:
+                            ElevatedButton.styleFrom(primary: Colors.black87),
+                        child: const Icon(
+                          Icons.question_answer_outlined,
+                          color: Colors.white,
+                        )),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black87,
+                        ),
+                        child: const Icon(
+                          Icons.check_box_rounded,
+                          color: Colors.white,
+                        )),
+                  ),
                 ],
               ),
             ),

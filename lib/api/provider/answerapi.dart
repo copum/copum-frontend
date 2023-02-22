@@ -37,6 +37,30 @@ class AnswerApiClient {
       return null;
     }
   }
+
+  dynamic insert(String title, String content, int author, String? image,
+      int question) async {
+    try {
+      dynamic data = {
+        "question": question,
+        "Answer_image": null,
+        'Answer_title': title,
+        'Answer_content': content,
+        'Author': author,
+      };
+      final String jsonString = jsonEncode(data);
+      // http.Response response = await http.post(Uri.parse(boardUrl));
+      // var data = BoardModel().toJson();
+      var response = await httpClient.post(Uri.parse(answerUrl),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: jsonString);
+      print(response);
+    } catch (e) {
+      return null;
+    }
+  }
 }
 
 

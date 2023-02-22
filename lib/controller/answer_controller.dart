@@ -21,4 +21,8 @@ class AnswerController extends GetxController {
     answerModel.value = await repository.fetchBoard(); //.value
     // print('ret: ${boardModel.value}');
   }
+
+  void insert(title, content, author, image, question) {
+    repository.insertBoard(title, content, author, image, question);
+  }
 }

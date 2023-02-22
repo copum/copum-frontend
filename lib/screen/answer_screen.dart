@@ -1,102 +1,35 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:copum/widget/answer_widget.dart';
-import 'package:copum/widget/post_widget.dart';
+import 'package:copum/controller/answer_controller.dart';
+import 'package:copum/controller/kakao_login_controller.dart';
 import 'package:dio/dio.dart';
-// import 'package:get/get.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart'; // category
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-// import 'package:get/get.dart';
+import 'package:get/get.dart' hide MultipartFile, FormData;
 
-class AnswerScreen extends StatefulWidget {
-  const AnswerScreen({Key? key}) : super(key: key);
-
-  @override
-  State<AnswerScreen> createState() => _BoardScreen();
-}
-
-class Category {
-  final int id;
-  final String name;
-
-  const Category({required this.id, required this.name});
-
-  static fromJson(json) {}
-}
-
-class _BoardScreen extends State<AnswerScreen> {
+class AnswerScreen extends GetView<AnswerController> {
   String title = '';
   MultipartFile? img;
-  Future<void> onPress() async {
-    var url = "http://10.0.2.2:8000/answer/";
-    String str = _controller.document.toDelta().toJson().toString();
-    var dio = Dio();
+  late int author;
 
-    dio.options.contentType = 'multipart/form-data';
-    var formData = new FormData.fromMap({
-      // 'Question_category1': _selectedCategory[0]!.id,
-      // 'Question_category2':
-      //     _selectedCategory.length >= 2 ? _selectedCategory[1]!.id : null,
-      // 'Question_category3':
-      //     _selectedCategory.length >= 3 ? _selectedCategory[2]!.id : null,
-      // 'Question_category4':
-      //     _selectedCategory.length >= 4 ? _selectedCategory[3]!.id : null,
-      'Answer_title': title,
-      'Answer_image': img ?? null,
-      'Answer_content': str,
-    });
-    try {
-      var response = await dio.post(url, data: formData);
-      print(response.data.toString());
-      print("success");
-    } catch (e) {
-      print(e.toString());
-      print("error");
-    }
+  Future<void> onPress() async {
+    var userModel = Get.find<LoginController>().userModel;
+    author = userModel.user_id;
+
+    var str = jsonEncode(_controller.document.toDelta().toJson());
+
+    var controller = Get.find<AnswerController>();
+    controller.insert(title, str, author, img, Get.arguments['pk']);
   }
 
-  FocusNode? editorFocus;
+  FocusNode editorFocus = FocusNode();
   bool editorFocused = false;
 
-  void initState() {
-    super.initState();
-    editorFocus = FocusNode();
-    _editorFocusListener();
-  }
-
-  _editorFocusListener() {
-    editorFocus!.addListener(() {
-      setState(() {
-        editorFocused = editorFocus!.hasFocus ? true : false;
-      });
-    });
-  }
-
   QuillController _controller = QuillController.basic();
-  static final List<Category> _categories = [
-    const Category(id: 1, name: 'Dart'),
-    const Category(id: 2, name: 'Php'),
-    const Category(id: 3, name: 'Python'),
-    const Category(id: 4, name: 'Java'),
-    const Category(id: 5, name: 'Go'),
-    const Category(id: 6, name: 'MySQL'),
-    const Category(id: 7, name: 'JavaScript'),
-  ];
-
-  final _items = _categories
-      .map((category1) => MultiSelectItem<Category?>(category1, category1.name))
-      .toList();
-  List<Category?> _selectedCategory = [];
-  MultiSelectChipDisplay<Category> chip = MultiSelectChipDisplay<Category>(
-    textStyle:
-        TextStyle(color: Colors.yellow, backgroundColor: Colors.red), // 칩 글자 색
-    chipColor: Color.fromARGB(255, 56, 59, 61),
-  );
   final _multiSelectKey = GlobalKey<FormFieldState>();
 
   Future<String> _onImagePickCallback(File file) async {
@@ -120,16 +53,16 @@ class _BoardScreen extends State<AnswerScreen> {
         centerTitle: true,
         leading: IconButton(
             onPressed: () {
-              //Get.to(Login());
+              Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back)),
         actions: [
-          new IconButton(
+          IconButton(
             icon: new Icon(Icons.send),
             tooltip: 'send',
             onPressed: () {
               onPress();
-              setState(() {});
+              Navigator.pop(context);
             },
           )
         ],
