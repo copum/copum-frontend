@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:copum/api/model/user_model.dart';
 import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/api/repository/kakao_login_repository.dart';
+import 'package:copum/controller/user_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -53,6 +54,8 @@ class LoginController extends GetxController {
     final response = await repository.kakaoLogin(accessToken);
     var user_response = response["user"];
     _userModel.value = UserModel.fromJson(user_response);
+    Get.put(UserController());
+    Get.find<UserController>().user = _userModel.value;
     if (response['error']) {
       // Get.toNamed('/agreement');
       //error ==> ??? Toast?
