@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class BoardModel {
   late int pk;
   late String title;
@@ -10,6 +12,7 @@ class BoardModel {
   late int questionCounting;
   late int answerCounting;
   late String? image;
+  late String question_created_at;
   // late int answerCounting;
 
   //테스트 모델
@@ -17,20 +20,20 @@ class BoardModel {
   // late String user_id;
   // late String email;
 
-  BoardModel({
-    pk,
-    title,
-    category1,
-    category2,
-    category3,
-    category4,
-    content,
-    questionCounting,
-    answerCounting,
-    image,
-    Author_id,
-    // answerCounting
-  });
+  BoardModel(
+      {pk,
+      title,
+      category1,
+      category2,
+      category3,
+      category4,
+      content,
+      questionCounting,
+      answerCounting,
+      image,
+      Author_id,
+      // answerCounting
+      question_created_at});
   // BoardModel({user_id, email});
 
   BoardModel.fromJson(Map<String, dynamic> json) {
@@ -44,7 +47,9 @@ class BoardModel {
     questionCounting = json['Question_counting'];
     image = json['Question_image'];
     answerCounting = json['answers_count'];
-    Author_id = json['Author_id'];
+    Author_id = json['Author'];
+    DateTime createdDate = DateTime.parse(json["Question_created_at"]);
+    question_created_at = DateFormat('yyyy.MM.dd').format(createdDate);
   }
 
   Map<String, dynamic> toJson() {
@@ -58,7 +63,7 @@ class BoardModel {
     // data['Question_counting'] = questionCounting;
     data['Question_image'] = image;
     // data['answers_count'] = answerCounting;
-    data['Author_id'] = Author_id;
+    data['Author'] = Author_id;
 
     // data['search_title'] = user_id;
     // data['email'] = email;

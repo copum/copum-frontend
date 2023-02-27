@@ -16,10 +16,13 @@ class PostWidget extends GetView {
   String title;
   String content;
   int questionCounting;
+  String time;
 
-  PostWidget(this.pk, this.title, this.content, this.questionCounting,
+  PostWidget(
+      this.pk, this.title, this.content, this.questionCounting, this.time,
       {Key? key})
       : super(key: key);
+
 // 프로필 사진
   Widget profileImage() {
     return GestureDetector(
@@ -35,7 +38,7 @@ class PostWidget extends GetView {
   }
 
 // 프로필이름 , 시간
-  Widget body(String profile) {
+  Widget body(String profile, String time) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -47,7 +50,7 @@ class PostWidget extends GetView {
           height: 3,
         ),
         Text(
-          title,
+          time,
           style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
       ],
@@ -105,7 +108,7 @@ class PostWidget extends GetView {
               const SizedBox(
                 width: 10,
               ),
-              body(userModel.profile),
+              body(userModel.profile, time),
               // const SizedBox(
               //   height: 20,
               // ),
