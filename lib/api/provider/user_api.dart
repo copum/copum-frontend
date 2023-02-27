@@ -11,8 +11,8 @@ import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 // const boardUrl = 'http://localhost:8000/question/';
 
 String userUrl = Platform.isAndroid
-    ? 'http://10.0.2.2:8000/user'
-    : 'http://127.0.0.1:8000/user';
+    ? 'http://10.0.2.2:8000/list/'
+    : 'http://127.0.0.1:8000/list/';
 
 class UserApiClient {
   final http.Client httpClient;

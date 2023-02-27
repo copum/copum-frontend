@@ -1,7 +1,7 @@
 import 'package:copum/api/provider/user_api.dart';
 
 class UserRepository {
-  final UserApiClient userApi;
+  final UserApiClient apiClient;
 
-  UserRepository({required this.userApi});
+  UserRepository({required this.apiClient});
 }

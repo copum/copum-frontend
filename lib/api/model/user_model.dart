@@ -1,7 +1,7 @@
 class UserModel {
   late String email;
   late String profile;
-  late String? profile_image;
+  String? profile_image;
   late int user_id;
   UserModel({email, profile, profile_image, user_id});
 
