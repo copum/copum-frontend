@@ -120,6 +120,8 @@ class SearchScreen extends GetView<BoardController> {
                                   _.searchModel.value[index].content,
                                   _.searchModel.value[index].questionCounting,
                                   _.boardModel.value[index].question_created_at,
+                                  _.boardModel.value[index].answerCounting,
+                                  _.boardModel.value[index].image,
                                 ),
                               );
                             },

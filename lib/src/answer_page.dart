@@ -17,10 +17,37 @@ class AnswerPage extends GetView {
         // A = title;
         // Get.toNamed('/answer');
       },
-      child: const CircleAvatar(
+      child: CircleAvatar(
         radius: 20,
         backgroundColor: Colors.red,
+        child: ClipOval(
+          child: Image.network(
+            Get.arguments['profile_image'],
+            fit: BoxFit.cover,
+            width: 40,
+            height: 40,
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget body(String profile, String time) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          profile,
+          style: const TextStyle(fontSize: 12, color: Colors.white),
+        ),
+        const SizedBox(
+          height: 3,
+        ),
+        Text(
+          time,
+          style: const TextStyle(fontSize: 12, color: Colors.grey),
+        ),
+      ],
     );
   }
 
@@ -73,17 +100,19 @@ class AnswerPage extends GetView {
                   height: 15,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     profileImage(),
                     const SizedBox(
-                      width: 5,
+                      width: 10,
                     ),
-                    const Text(
-                      '답변자 닉네임',
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                    )
+                    body(
+                      Get.arguments['profile'],
+                      Get.arguments['answer_created_at'],
+                    ),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                   ],
                 ),
                 const SizedBox(

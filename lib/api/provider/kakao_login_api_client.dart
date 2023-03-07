@@ -18,6 +18,8 @@ import 'dart:io' show Platform;
 
 import 'package:path/path.dart';
 
+import '../../controller/user_controller.dart';
+
 //애뮬레이터에서 돌릴때 10.0.2.2 아닐땐 실제 url 사용
 // const baseUrl = 'http://10.0.2.2:8000/account/kakao/login'; //카카오 android
 // const baseUrl = 'http://127.0.0.1:8000/account/kakao/login'; //카카오 ios
@@ -38,8 +40,12 @@ class CopumApiClient {
 
       http.Response response = await httpClient.get(url);
       var test = jsonDecode(utf8.decode(response.bodyBytes));
-      var test1 = test["user"];
-      var _userModel = UserModel.fromJson(test1);
+      var user_response = test["user"];
+      UserController userController = UserController();
+      Get.put(userController);
+      var controller = Get.find<UserController>();
+      controller.fetchUserData(user_response);
+
       if (response.statusCode == 200) {
         var result = jsonDecode(utf8.decode(response.bodyBytes));
         return result;

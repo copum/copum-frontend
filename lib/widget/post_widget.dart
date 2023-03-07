@@ -14,14 +14,25 @@ import '../controller/kakao_login_controller.dart';
 class PostWidget extends GetView {
   int? pk;
   String profile;
-  String image;
+  String profile_image;
   String title;
   String content;
+  // String question_image;
   int questionCounting;
   String time;
+  int answerCounting;
+  String? question_image;
 
-  PostWidget(this.pk, this.profile, this.image, this.title, this.content,
-      this.questionCounting, this.time,
+  PostWidget(
+      this.pk,
+      this.profile,
+      this.profile_image,
+      this.title,
+      this.content,
+      this.questionCounting,
+      this.time,
+      this.answerCounting,
+      this.question_image,
       {Key? key})
       : super(key: key);
 
@@ -37,7 +48,7 @@ class PostWidget extends GetView {
         backgroundColor: Colors.red,
         child: ClipOval(
           child: Image.network(
-            image,
+            profile_image,
             fit: BoxFit.cover,
             width: 40,
             height: 40,
@@ -75,11 +86,13 @@ class PostWidget extends GetView {
         Get.toNamed('/answer', arguments: {
           'pk': pk,
           'profile': profile,
-          'image': image,
+          'image': profile_image,
           'title': title,
           'content': content,
           // 'answerCounting': answerCounting,
-          'questionCounting': questionCounting
+          'questionCounting': questionCounting,
+          'time': time,
+          'question_image': question_image,
         });
       },
       child: Text(
@@ -103,7 +116,7 @@ class PostWidget extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    var userModel = Get.find<LoginController>().userModel;
+    // var userModel = Get.find<LoginController>().userModel;
     var test = Get.find<BoardController>().dataTest;
     return Container(
       margin: const EdgeInsets.only(left: 26, right: 26),
@@ -142,19 +155,21 @@ class PostWidget extends GetView {
           ),
 
           //이미지
-          SizedBox(
-            height: 250,
-            width: double.infinity,
-            child: Container(
-              color: Colors.white,
-            ),
-          ),
+          question_image == null
+              ? const SizedBox()
+              : SizedBox(
+                  height: 250,
+                  width: double.infinity,
+                  child: Container(
+                    color: Colors.white,
+                  ),
+                ),
 
           const SizedBox(
             height: 16,
           ),
           Text(
-            '$questionCounting 번의 조회 * answerCounting 개의 답변',
+            '$questionCounting 번의 조회 * $answerCounting 개의 답변',
             style: const TextStyle(
               color: Colors.grey,
               fontSize: 12,

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:copum/controller/board_controller.dart';
+import 'package:copum/controller/user_controller.dart';
 import 'package:copum/src/profile.dart';
 import 'package:copum/widget/answer_widget.dart';
 import 'package:dio/dio.dart';
@@ -86,8 +87,7 @@ class QuestionScreen extends GetView<BoardController> {
 
   @override
   Widget build(BuildContext context) {
-    var userModel = Get.find<LoginController>().userModel;
-    author_id = userModel.user_id;
+    var userModel = Get.find<UserController>().userModel;
 
     // Get.put(QuestionTestController());
     // Get.find<QuestionTestController>().onInit();
@@ -101,6 +101,7 @@ class QuestionScreen extends GetView<BoardController> {
         leading: IconButton(
             onPressed: () {
               //Get.to(Login());
+              print(userModel);
             },
             icon: const Icon(Icons.arrow_back)),
         actions: [

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:intl/intl.dart';
 
 class BoardModel {
@@ -8,7 +10,7 @@ class BoardModel {
   int? category2;
   int? category3;
   int? category4;
-  Map<String, dynamic>? Author;
+  late Map<String, dynamic> Author;
   late int questionCounting;
   late int answerCounting;
   late String? image;

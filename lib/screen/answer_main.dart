@@ -45,6 +45,7 @@ class AnswerMain extends GetView<AnswerController> {
               image: Get.arguments['image'],
               title: Get.arguments['title'],
               content: Get.arguments['content'],
+              time: Get.arguments['time'],
             ),
             GetX<AnswerController>(
               initState: (state) {
@@ -73,6 +74,9 @@ class AnswerMain extends GetView<AnswerController> {
                         ? TestWidget(
                             _.answerModel.value[index].title,
                             _.answerModel.value[index].content,
+                            _.answerModel.value[index].Author['user_id'],
+                            _.answerModel.value[index].Author['profile_image'],
+                            _.answerModel.value[index].answer_created_at,
                           )
                         : const SizedBox();
                   },

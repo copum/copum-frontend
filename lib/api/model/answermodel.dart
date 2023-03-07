@@ -1,15 +1,12 @@
+import 'package:intl/intl.dart';
+
 class AnswerModel {
   late int? question_id;
   late String title;
   late String content;
   late String? answer_created_at;
   late String? image;
-  // late int answerCounting;
-
-  //테스트 모델
-
-  // late String user_id;
-  // late String email;
+  Map<String, dynamic>? Author;
 
   AnswerModel({
     question_id,
@@ -17,14 +14,17 @@ class AnswerModel {
     content,
     answer_created_at,
     image,
+    Author,
   });
 
   AnswerModel.fromJson(Map<String, dynamic> json) {
     question_id = json['question'];
     title = json['Answer_title'];
     content = json["Answer_content"];
-    answer_created_at = json['Answer_created_at'];
+    DateTime createdDate = DateTime.parse(json["Answer_created_at"]);
+    answer_created_at = DateFormat('yyyy.MM.dd').format(createdDate);
     image = json['Answer_image'];
+    Author = json['Author'];
   }
 
   Map<String, dynamic> toJson() {
@@ -34,6 +34,7 @@ class AnswerModel {
     data['Answer_content'] = content;
     data['Answer_created_at'] = answer_created_at;
     data['Answer_image'] = image;
+    data['Author'] = Author;
 
     return data;
   }

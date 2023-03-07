@@ -19,9 +19,11 @@ class AnswerWidget extends GetView<BoardController> {
   String profile;
   String image;
   String title;
+  String time;
   String content;
   int? answerCounting;
   int? questionCounting;
+  String? question_image;
 
   List Cat = ["Dart", "PHP", "Python", "Java", "Go", "MySQL", "JavaScript"];
   String cat = '';
@@ -34,6 +36,7 @@ class AnswerWidget extends GetView<BoardController> {
       {required this.pk,
       required this.profile,
       required this.image,
+      required this.time,
       required this.title,
       required this.content,
       Key? key})
@@ -62,8 +65,9 @@ class AnswerWidget extends GetView<BoardController> {
   }
 
 // 프로필이름 , 시간
-  Widget answerBody(String profile) {
+  Widget answerBody() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           profile,
@@ -73,7 +77,7 @@ class AnswerWidget extends GetView<BoardController> {
           height: 3,
         ),
         Text(
-          '시간',
+          time,
           style: const TextStyle(fontSize: 12, color: Colors.grey),
         ),
       ],
@@ -110,133 +114,130 @@ class AnswerWidget extends GetView<BoardController> {
 
   @override
   Widget build(BuildContext context) {
-    var userModel = Get.find<LoginController>().userModel;
-    return Container(
-        margin: const EdgeInsets.only(left: 26, right: 26),
-        alignment: Alignment.topLeft,
-        child: SizedBox(
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  // const SizedBox(
-                  //   width: 20,
-                  // ),
-                  profileImage(),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  answerBody(profile),
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: 20,
-                child: Text(
-                  cat,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+    // var userModel = Get.find<LoginController>().userModel;
+    return Padding(
+        padding: const EdgeInsets.only(left: 26, right: 26),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                // const SizedBox(
+                //   width: 20,
+                // ),
+                profileImage(),
+                const SizedBox(
+                  width: 10,
                 ),
+                answerBody(),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              height: 20,
+              child: Text(
+                cat,
+                style: const TextStyle(fontSize: 12, color: Colors.grey),
               ),
-              answerTitle(title),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(
-                // '${Get.arguments['quesitonCounting']} 번의 조회 * ${Get.arguments['answerCounting']} 개의 답변',
-                "test",
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const Divider(
-                height: 2,
+            ),
+            answerTitle(title),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              // '${Get.arguments['quesitonCounting']} 번의 조회 * ${Get.arguments['answerCounting']} 개의 답변',
+              "test",
+              style: const TextStyle(
                 color: Colors.grey,
+                fontSize: 12,
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              answerContent(content),
-              const SizedBox(
-                height: 24,
-              ),
-              //이미지
-              SizedBox(
-                height: 250,
-                width: double.infinity,
-                child: Container(
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  ElevatedButton.icon(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.grey,
-                        minimumSize: const Size(152, 44),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        elevation: 0.0,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const Divider(
+              height: 2,
+              color: Colors.grey,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            answerContent(content),
+            const SizedBox(
+              height: 24,
+            ),
+            //이미지
+            question_image == null
+                ? const SizedBox()
+                : SizedBox(
+                    height: 250,
+                    width: double.infinity,
+                    child: Container(
+                      color: Colors.white,
+                    ),
+                  ),
+            const SizedBox(
+              height: 16,
+            ),
+            Row(
+              children: [
+                ElevatedButton.icon(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.grey,
+                      minimumSize: const Size(152, 44),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      icon: const Icon(
-                        Icons.question_answer,
+                      elevation: 0.0,
+                    ),
+                    icon: const Icon(
+                      Icons.question_answer,
+                      color: Colors.white,
+                    ),
+                    label: const Text(
+                      '궁금합니다!',
+                      style: TextStyle(
                         color: Colors.white,
                       ),
-                      label: const Text(
-                        '궁금합니다!',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      )),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  ElevatedButton.icon(
-                      onPressed: () {
-                        Get.toNamed('/answer2', arguments: {
-                          'pk': pk,
-                          'Question_title': title,
-                        });
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.greenAccent,
-                        minimumSize: const Size(160, 44),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        elevation: 0.0,
+                    )),
+                const SizedBox(
+                  width: 16,
+                ),
+                ElevatedButton.icon(
+                    onPressed: () {
+                      Get.toNamed('/answer2', arguments: {
+                        'pk': pk,
+                        'Question_title': title,
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.greenAccent,
+                      minimumSize: const Size(160, 44),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      icon: const Icon(
-                        Icons.question_answer,
+                      elevation: 0.0,
+                    ),
+                    icon: const Icon(
+                      Icons.question_answer,
+                      color: Colors.black,
+                    ),
+                    label: const Text(
+                      '답변하기',
+                      style: TextStyle(
                         color: Colors.black,
                       ),
-                      label: const Text(
-                        '답변하기',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ))
-                ],
-              )
-            ],
-          )
-        ])));
+                    ))
+              ],
+            )
+          ],
+        ));
   }
 }
 

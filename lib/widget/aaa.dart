@@ -7,10 +7,15 @@ class TestWidget extends GetView<AnswerController> {
   int? id;
   String title;
   String content;
-  String? answer_created_at;
+  String answer_created_at;
   String? image;
+  String profile;
+  String profile_image;
 
-  TestWidget(this.title, this.content, {Key? key}) : super(key: key);
+  TestWidget(this.title, this.content, this.profile, this.profile_image,
+      this.answer_created_at,
+      {Key? key})
+      : super(key: key);
 
 // 프로필 사진
   Widget profileImage() {
@@ -19,9 +24,17 @@ class TestWidget extends GetView<AnswerController> {
         // A = title;
         // Get.toNamed('/answer');
       },
-      child: const CircleAvatar(
+      child: CircleAvatar(
         radius: 20,
         backgroundColor: Colors.red,
+        child: ClipOval(
+          child: Image.network(
+            profile_image,
+            fit: BoxFit.cover,
+            width: 40,
+            height: 40,
+          ),
+        ),
       ),
     );
   }
@@ -73,6 +86,10 @@ class TestWidget extends GetView<AnswerController> {
                 Get.toNamed('/answer_page', arguments: {
                   'title': title,
                   'content': content,
+                  'image': image,
+                  'profile': profile,
+                  'profile_image': profile_image,
+                  'answer_created_at': answer_created_at,
                 });
               },
               child: Column(
@@ -87,9 +104,9 @@ class TestWidget extends GetView<AnswerController> {
                       const SizedBox(
                         width: 5,
                       ),
-                      const Text(
-                        '답변자 닉네임',
-                        style: TextStyle(
+                      Text(
+                        profile,
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black,
                         ),

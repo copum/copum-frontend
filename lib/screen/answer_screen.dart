@@ -17,8 +17,8 @@ class AnswerScreen extends GetView<AnswerController> {
   late int author;
 
   Future<void> onPress() async {
-    var userModel = Get.find<LoginController>().userModel;
-    author = userModel.user_id;
+    // var userModel = Get.find<LoginController>().userModel;
+    // author = userModel.user_id;
 
     var str = jsonEncode(_controller.document.toDelta().toJson());
 

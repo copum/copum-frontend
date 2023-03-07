@@ -87,16 +87,19 @@ class _CategoryMenuState extends State<CategoryMenu> {
                               // selection: TextSelection.collapsed(offset: 0));
                               return SingleChildScrollView(
                                 child: PostWidget(
-                                    _.boardModel.value[index].pk,
-                                    _.boardModel.value[index].Author["user_id"],
-                                    _.boardModel.value[index]
-                                        .Author["profile_image"],
-                                    _.boardModel.value[index].title,
-                                    _.boardModel.value[index].content,
-                                    // _.boardModel.value[index].answerCounting,
-                                    _.boardModel.value[index].questionCounting,
-                                    _.boardModel.value[index]
-                                        .question_created_at),
+                                  _.boardModel.value[index].pk,
+                                  _.boardModel.value[index].Author["user_id"],
+                                  _.boardModel.value[index]
+                                      .Author["profile_image"],
+                                  _.boardModel.value[index].title,
+                                  _.boardModel.value[index].content,
+
+                                  // _.boardModel.value[index].answerCounting,
+                                  _.boardModel.value[index].questionCounting,
+                                  _.boardModel.value[index].question_created_at,
+                                  _.boardModel.value[index].answerCounting,
+                                  _.boardModel.value[index].image,
+                                ),
                               );
                             },
                             separatorBuilder: (context, index) => const Divider(

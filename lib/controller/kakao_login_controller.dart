@@ -13,9 +13,6 @@ class LoginController extends GetxController {
   final KakaoLoginRepository repository;
   LoginController({required this.repository});
 
-  var _userModel = UserModel().obs;
-  UserModel get userModel => _userModel.value;
-
   // Page _page = Page.main;
   // Page get page => _page;
   String page = 'error';
@@ -61,9 +58,7 @@ class LoginController extends GetxController {
   Future<String> kakaologinControl(String accessToken) async {
     final response = await repository.kakaoLogin(accessToken);
     var user_response = response["user"];
-    _userModel.value = UserModel.fromJson(user_response);
-    // Get.put(UserController());
-    // Get.find<UserController>().user = _userModel.value;
+
     if (response['error']) {
       page = 'error';
       return page;
