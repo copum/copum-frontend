@@ -113,6 +113,8 @@ class LoginScreen extends GetView<LoginController> {
               var page = await Get.find<LoginController>().checkLogin();
               if (page == 'main') {
                 Get.toNamed('/home');
+              } else {
+                // 카카오로그인 실패..
               }
             },
             style: ElevatedButton.styleFrom(
