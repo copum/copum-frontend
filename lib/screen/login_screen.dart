@@ -3,8 +3,9 @@ import 'package:copum/screen/home_screen.dart';
 import 'package:path/path.dart' as Path;
 import 'package:copum/api/google_signin_api.dart';
 import 'package:flutter/material.dart';
-import '../controller/kakao_login_controller.dart';
+
 import 'package:get/get.dart';
+import '../controller/kakao_login_controller.dart';
 import 'google_login_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +20,6 @@ import 'package:http/http.dart' as http;
 //     required this.data,
 //   });
 // }
-
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -109,8 +109,11 @@ class LoginScreen extends GetView<LoginController> {
                 ),
               ),
             ),
-            onPressed: () {
-              Get.find<LoginController>().checkLogin();
+            onPressed: () async {
+              var page = await Get.find<LoginController>().checkLogin();
+              if (page == 'main') {
+                Get.toNamed('/home');
+              }
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.yellow,
