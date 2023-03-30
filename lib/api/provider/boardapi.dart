@@ -28,6 +28,8 @@ class BoardApiClient {
       var boardModel =
           body.map((dynamic item) => BoardModel.fromJson(item)).toList();
 
+      List<BoardModel> userModel;
+
       return boardModel;
       //return ResponseModel(boardModel: boardModel);
     } catch (e) {

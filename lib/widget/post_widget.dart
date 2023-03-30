@@ -13,13 +13,15 @@ import '../controller/kakao_login_controller.dart';
 
 class PostWidget extends GetView {
   int? pk;
+  String profile;
+  String image;
   String title;
   String content;
   int questionCounting;
   String time;
 
-  PostWidget(
-      this.pk, this.title, this.content, this.questionCounting, this.time,
+  PostWidget(this.pk, this.profile, this.image, this.title, this.content,
+      this.questionCounting, this.time,
       {Key? key})
       : super(key: key);
 
@@ -30,9 +32,17 @@ class PostWidget extends GetView {
         // A = title;
         // Get.toNamed('/answer');
       },
-      child: const CircleAvatar(
+      child: CircleAvatar(
         radius: 20,
         backgroundColor: Colors.red,
+        child: ClipOval(
+          child: Image.network(
+            image,
+            fit: BoxFit.cover,
+            width: 40,
+            height: 40,
+          ),
+        ),
       ),
     );
   }
@@ -64,6 +74,8 @@ class PostWidget extends GetView {
       onTap: () {
         Get.toNamed('/answer', arguments: {
           'pk': pk,
+          'profile': profile,
+          'image': image,
           'title': title,
           'content': content,
           // 'answerCounting': answerCounting,
@@ -108,7 +120,7 @@ class PostWidget extends GetView {
               const SizedBox(
                 width: 10,
               ),
-              body(userModel.profile, time),
+              body(profile, time),
               // const SizedBox(
               //   height: 20,
               // ),

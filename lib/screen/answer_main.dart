@@ -5,7 +5,6 @@ import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/controller/answer_controller.dart';
 import 'package:copum/controller/board_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
-import 'package:copum/src/question.dart';
 import 'package:copum/widget/post_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -42,6 +41,8 @@ class AnswerMain extends GetView<AnswerController> {
             ),
             AnswerWidget(
               pk: Get.arguments['pk'],
+              profile: Get.arguments['profile'],
+              image: Get.arguments['image'],
               title: Get.arguments['title'],
               content: Get.arguments['content'],
             ),

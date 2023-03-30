@@ -1,15 +1,8 @@
-import 'package:copum/api/model/boardmodel.dart';
-import 'package:copum/api/provider/boardapi.dart';
 import 'package:copum/controller/answer_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk_talk.dart';
 import 'package:get/get.dart';
 
-import '../controller/board_controller.dart';
-
+//답변 글들 보여지는 ..
 class TestWidget extends GetView<AnswerController> {
   int? id;
   String title;
@@ -39,7 +32,7 @@ class TestWidget extends GetView<AnswerController> {
       '$content',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.black,
         fontSize: 14,
         fontWeight: FontWeight.bold,
@@ -52,7 +45,7 @@ class TestWidget extends GetView<AnswerController> {
       '$title',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.black87,
         fontSize: 16,
         fontWeight: FontWeight.bold,
@@ -143,8 +136,3 @@ class TestWidget extends GetView<AnswerController> {
     );
   }
 }
-/* category 1,2,3,4 == null -> 
-category1,2,3,4[]
-
-
-*/

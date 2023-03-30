@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:copum/controller/board_controller.dart';
-import 'package:copum/controller/question_controller%20copy.dart';
 import 'package:copum/src/profile.dart';
 import 'package:copum/widget/answer_widget.dart';
 import 'package:dio/dio.dart';

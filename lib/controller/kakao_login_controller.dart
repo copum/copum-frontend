@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:copum/api/model/user_model.dart';
 import 'package:copum/api/provider/kakao_login_api_client.dart';
 import 'package:copum/api/repository/kakao_login_repository.dart';

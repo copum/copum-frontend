@@ -1,10 +1,13 @@
 import 'package:copum/binding/kakao_login_binding.dart';
 import 'package:copum/controller/root_page_controller.dart';
+
 import 'package:copum/router/routes.dart';
 import 'package:copum/screen/answer_screen.dart';
 import 'package:copum/screen/question_screen.dart';
 import 'package:copum/screen/login_screen.dart';
 
+import 'package:copum/src/Search.dart';
+import 'package:copum/widget/aaa.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:get/get.dart';
@@ -32,7 +35,7 @@ class MyApp extends StatelessWidget {
       // home: const Root(),
       //home: const Root(),
       // home: AnswerScreen(),
-      // home: TestWidget(),
+      // home: PostTest(),
     );
   }
 }

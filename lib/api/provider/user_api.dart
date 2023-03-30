@@ -19,4 +19,20 @@ class UserApiClient {
   UserApiClient({required this.httpClient});
 
   setUser(user) {}
+
+  dynamic fetchUserData() async {
+    try {
+      http.Response response = await http.get(Uri.parse(userUrl));
+      // List<dynamic> body = json.decode(response.body);
+      List<dynamic> body = jsonDecode(utf8.decode(response.bodyBytes));
+      var userModel =
+          body.map((dynamic item) => UserModel.fromJson(item)).toList();
+
+      return userModel;
+      //return ResponseModel(boardModel: boardModel);
+    } catch (e) {
+      //return ResponseModel(exception: e as Exception);
+      return null;
+    }
+  }
 }

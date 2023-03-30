@@ -62,13 +62,3 @@ class AnswerApiClient {
     }
   }
 }
-
-
-      // var boardModel = QuillController(
-      //     document: Document.fromJson(body),
-      //     selection: TextSelection.collapsed(offset: 0));
-      //throw Exception('test exception');
-
-      // List<BoardModel> boardModel = body.cast<BoardModel>();
-      // List<BoardModel> boardModel =
-      //     body.map((e) => BoardModel.fromJson(e)).toList();

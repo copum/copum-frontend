@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 import '../widget/password_hint.dart';
-import 'start.dart';
+import 'intro.dart';
 
 class PasswordScreen extends StatefulWidget {
   const PasswordScreen({Key? key}) : super(key: key);
