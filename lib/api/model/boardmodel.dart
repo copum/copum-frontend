@@ -8,7 +8,7 @@ class BoardModel {
   int? category2;
   int? category3;
   int? category4;
-  int? Author_id;
+  Map<String, dynamic>? Author;
   late int questionCounting;
   late int answerCounting;
   late String? image;
@@ -31,7 +31,7 @@ class BoardModel {
       questionCounting,
       answerCounting,
       image,
-      Author_id,
+      Author,
       // answerCounting
       question_created_at});
   // BoardModel({user_id, email});
@@ -47,7 +47,7 @@ class BoardModel {
     questionCounting = json['Question_counting'];
     image = json['Question_image'];
     answerCounting = json['answers_count'];
-    Author_id = json['Author'];
+    Author = json['Author'];
     DateTime createdDate = DateTime.parse(json["Question_created_at"]);
     question_created_at = DateFormat('yyyy.MM.dd').format(createdDate);
   }
@@ -63,7 +63,7 @@ class BoardModel {
     // data['Question_counting'] = questionCounting;
     data['Question_image'] = image;
     // data['answers_count'] = answerCounting;
-    data['Author'] = Author_id;
+    data['Author'] = Author;
 
     // data['search_title'] = user_id;
     // data['email'] = email;
