@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:copum/api/model/boardmodel.dart';
 import 'package:copum/controller/board_controller.dart';
+import 'package:copum/controller/kakao_login_controller.dart';
 import 'package:copum/controller/root_page_controller.dart';
 import 'package:copum/widget/post_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:get/route_manager.dart';
 import 'package:get/get.dart';
 import 'package:copum/widget/category_menu.dart';
-import 'question.dart';
 
 class BoardPage extends GetView<BoardController> {
   // late String content;
@@ -27,6 +27,7 @@ class BoardPage extends GetView<BoardController> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.black,
         title: const Text(
           '코품',
@@ -64,7 +65,6 @@ class BoardPage extends GetView<BoardController> {
                               // print('values: $myJSON');
                               // print('$a');
                               _.boardModel.value[index].content = a;
-                              // return _.boardModel[index].content;
                             } catch (e) {
                               print(e);
                             }
@@ -74,10 +74,14 @@ class BoardPage extends GetView<BoardController> {
                             return SingleChildScrollView(
                               child: PostWidget(
                                 _.boardModel.value[index].pk,
+                                _.boardModel.value[index].Author["user_id"],
+                                _.boardModel.value[index]
+                                    .Author["profile_image"],
                                 _.boardModel.value[index].title,
                                 _.boardModel.value[index].content,
                                 // _.boardModel.value[index].answerCounting,
                                 _.boardModel.value[index].questionCounting,
+                                _.boardModel.value[index].question_created_at,
                               ),
                             );
                           },

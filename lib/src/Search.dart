@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:copum/api/model/boardmodel.dart';
+import 'package:copum/widget/aaa.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:copum/controller/board_controller.dart';
@@ -46,8 +47,13 @@ class SearchScreen extends GetView<BoardController> {
             TextField(
               controller: textController,
               onSubmitted: (data) {
-                print("onSubmit");
-                Get.find<BoardController>().search(data);
+                data.isEmpty
+                    ? Get.dialog(Title(color: Colors.red, child: Text('dd')))
+                    :
+                    // print("onSubmit");
+                    Get.find<BoardController>().search(data);
+
+                Get.find<BoardController>().clear();
               },
               decoration: InputDecoration(
                   // suffixIcon: Icon(Icons.cancel),
@@ -107,9 +113,13 @@ class SearchScreen extends GetView<BoardController> {
                               return SingleChildScrollView(
                                 child: PostWidget(
                                   _.searchModel.value[index].pk,
+                                  _.searchModel.value[index].Author["user_id"],
+                                  _.boardModel.value[index]
+                                      .Author["profile_image"],
                                   _.searchModel.value[index].title,
                                   _.searchModel.value[index].content,
                                   _.searchModel.value[index].questionCounting,
+                                  _.boardModel.value[index].question_created_at,
                                 ),
                               );
                             },

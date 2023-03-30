@@ -16,6 +16,8 @@ import '../controller/kakao_login_controller.dart';
 
 class AnswerWidget extends GetView<BoardController> {
   int? id;
+  String profile;
+  String image;
   String title;
   String content;
   int? answerCounting;
@@ -29,7 +31,12 @@ class AnswerWidget extends GetView<BoardController> {
   QuillController _controller = QuillController.basic();
 
   AnswerWidget(
-      {required this.pk, required this.title, required this.content, Key? key})
+      {required this.pk,
+      required this.profile,
+      required this.image,
+      required this.title,
+      required this.content,
+      Key? key})
       : super(key: key);
 
 // 프로필 사진
@@ -39,9 +46,17 @@ class AnswerWidget extends GetView<BoardController> {
         // A = title;
         // Get.toNamed('/answer');
       },
-      child: const CircleAvatar(
+      child: CircleAvatar(
         radius: 20,
         backgroundColor: Colors.red,
+        child: ClipOval(
+          child: Image.network(
+            image,
+            fit: BoxFit.cover,
+            width: 40,
+            height: 40,
+          ),
+        ),
       ),
     );
   }
@@ -114,7 +129,7 @@ class AnswerWidget extends GetView<BoardController> {
                   const SizedBox(
                     width: 10,
                   ),
-                  answerBody(userModel.profile),
+                  answerBody(profile),
                   // const SizedBox(
                   //   height: 20,
                   // ),
@@ -196,6 +211,7 @@ class AnswerWidget extends GetView<BoardController> {
                       onPressed: () {
                         Get.toNamed('/answer2', arguments: {
                           'pk': pk,
+                          'Question_title': title,
                         });
                       },
                       style: ElevatedButton.styleFrom(
