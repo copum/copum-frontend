@@ -11,9 +11,10 @@ class TestWidget extends GetView<AnswerController> {
   String? image;
   String profile;
   String profile_image;
+  String? answer_image;
 
   TestWidget(this.title, this.content, this.profile, this.profile_image,
-      this.answer_created_at,
+      this.answer_created_at, this.answer_image,
       {Key? key})
       : super(key: key);
 
@@ -42,7 +43,7 @@ class TestWidget extends GetView<AnswerController> {
 // 포스트 내용
   Widget answerContent(String content) {
     return Text(
-      '$content',
+      content,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
@@ -55,7 +56,7 @@ class TestWidget extends GetView<AnswerController> {
 
   Widget answerTitle(String title) {
     return Text(
-      '$title',
+      title,
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
@@ -78,7 +79,7 @@ class TestWidget extends GetView<AnswerController> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12), color: Colors.white70),
             padding: const EdgeInsets.only(left: 16, right: 16),
-            height: 440,
+            height: answer_image == null ? 210 : 350,
             width: 280,
             margin: const EdgeInsets.only(right: 60),
             child: GestureDetector(
@@ -90,6 +91,7 @@ class TestWidget extends GetView<AnswerController> {
                   'profile': profile,
                   'profile_image': profile_image,
                   'answer_created_at': answer_created_at,
+                  'answer_image': answer_image,
                 });
               },
               child: Column(
@@ -139,11 +141,17 @@ class TestWidget extends GetView<AnswerController> {
                     height: 8,
                   ),
                   // 답변 이미지
-                  Container(
-                    color: Colors.white,
-                    height: 140,
-                    width: 250,
-                  ),
+                  answer_image != null
+                      ? SizedBox(
+                          height: 150,
+                          child: Image.network(
+                            answer_image!,
+                            fit: BoxFit.cover,
+                            width: 40,
+                            height: 40,
+                          ),
+                        )
+                      : const SizedBox()
                 ],
               ),
             ),
