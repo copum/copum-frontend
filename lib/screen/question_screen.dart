@@ -98,15 +98,9 @@ class QuestionScreen extends GetView<BoardController> {
         title: const Text('질문하기'),
         backgroundColor: Colors.black,
         centerTitle: true,
-        leading: IconButton(
-            onPressed: () {
-              //Get.to(Login());
-              print(userModel);
-            },
-            icon: const Icon(Icons.arrow_back)),
         actions: [
-          new IconButton(
-            icon: new Icon(Icons.send),
+          IconButton(
+            icon: const Icon(Icons.send),
             tooltip: 'send',
             onPressed: () {
               onPress();

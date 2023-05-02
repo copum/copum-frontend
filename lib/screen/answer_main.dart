@@ -47,6 +47,9 @@ class AnswerMain extends GetView<AnswerController> {
               content: Get.arguments['content'],
               time: Get.arguments['time'],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             GetX<AnswerController>(
               initState: (state) {
                 Get.find<AnswerController>().fetchBoard();
@@ -77,6 +80,7 @@ class AnswerMain extends GetView<AnswerController> {
                             _.answerModel.value[index].Author['user_id'],
                             _.answerModel.value[index].Author['profile_image'],
                             _.answerModel.value[index].answer_created_at,
+                            _.answerModel.value[index].image,
                           )
                         : const SizedBox();
                   },

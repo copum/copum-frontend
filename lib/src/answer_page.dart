@@ -141,12 +141,14 @@ class AnswerPage extends GetView {
                   height: 8,
                 ),
                 // 답변 이미지
-                Container(
-                  // margin: EdgeInsets.only(right: 10),
-                  color: Colors.white,
-                  height: 140,
-                  width: 320,
-                ),
+                Get.arguments['answer_image'] != null
+                    ? Container(
+                        // margin: EdgeInsets.only(right: 10),
+                        color: Colors.white,
+                        height: 140,
+                        width: 320,
+                      )
+                    : const SizedBox()
               ],
             ),
             const SizedBox(
