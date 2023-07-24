@@ -59,18 +59,27 @@ class LoginController extends GetxController {
     final response = await repository.kakaoLogin(accessToken);
     var user_response = response["user"];
 
-    if (response['error']) {
-      page = 'error';
+    if (response["status"] == 200) {
+      // 메인화면 이동
+      page = 'main';
       return page;
     } else {
-      if (response['status'] == 200) {
-        // 메인화면 이동
-        page = 'main';
-        return page;
-      } else {
-        // error : false , status 200 이 아닌경우 ,,
-      }
+      // error : false , status 200 이 아닌경우 ,,
+      page = 'error';
+      return page;
     }
-    return page;
+    //   if (response['error']) {
+    //     page = 'error';
+    //     return page;
+    //   } else {
+    //     if (response["status"] == 200) {
+    //       // 메인화면 이동
+    //       page = 'main';
+    //       return page;
+    //     } else {
+    //       // error : false , status 200 이 아닌경우 ,,
+    //     }
+    //   }
+    //   return page;
   }
 }

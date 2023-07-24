@@ -26,8 +26,8 @@ import '../../controller/user_controller.dart';
 // const baseUrl = 'http://localhost:8000/account/kakao/login';
 
 String baseUrl = Platform.isAndroid
-    ? 'http://10.0.2.2:8000/account/kakao/login'
-    : 'http://127.0.0.1:8000/account/kakao/login';
+    ? 'http://10.0.2.2:8000/users/login/kakao'
+    : 'http://127.0.0.1:8000/users/login/kakao';
 
 class CopumApiClient {
   final http.Client httpClient;
@@ -36,15 +36,15 @@ class CopumApiClient {
 
   kakaoLogin(String token) async {
     try {
-      final url = Uri.parse('$baseUrl?access_token=$token');
+      final url = Uri.parse("$baseUrl?AccessToken=$token");
 
-      http.Response response = await httpClient.get(url);
+      http.Response response = await httpClient.post(url);
       var test = jsonDecode(utf8.decode(response.bodyBytes));
       var user_response = test["user"];
       UserController userController = UserController();
       Get.put(userController);
       var controller = Get.find<UserController>();
-      controller.fetchUserData(user_response);
+      // controller.fetchUserData(user_response);
 
       if (response.statusCode == 200) {
         var result = jsonDecode(utf8.decode(response.bodyBytes));
